@@ -6,6 +6,7 @@
 //  Copyright © 2016 Inverse Palindrome. All rights reserved.
 //
 
+
 #include "inpalprime.hpp"
 #include <cmath>
 #include <vector>
@@ -25,7 +26,7 @@ long long inpalprime::p_gen(unsigned long long n)
         case 7:return 7;
     }
     //stores boolean values for primality testing, 1: prime, 0: not prime
-    std::vector<bool> p_test (n, false);
+    std::vector<bool> p_test (n+1, false);
     
     //sieve of atkin
     for(long long x=1; x<=root; x++)
@@ -66,11 +67,12 @@ long long inpalprime::p_gen(unsigned long long n)
     }
     
     //finds the highest possible prime under n
-    for(std::vector<bool>::size_type a=1; a!=p_test.size(); a++)
+    for(std::vector<bool>::size_type a=p_test.size()-1; a!=1; a--)
     {
         if((p_test[a]))
            {
                prime=a;
+               break;
            }
     }
 
