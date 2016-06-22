@@ -1,8 +1,8 @@
 //
 //  inpalprime.cpp
-//  InPal TESTS
+//  InPal 
 //
-//  Created by bryan triana on 6/21/16.
+//  Created by Bryan Triana on 6/21/16.
 //  Copyright © 2016 Inverse Palindrome. All rights reserved.
 //
 
@@ -12,7 +12,7 @@
 #include <vector>
 
 
-long long inpalprime::p_gen(unsigned long long n)
+long long inpalprime::pn_find(unsigned long long n)
 {
     //defines square root of n
     long long root=ceil(sqrt(n));
@@ -76,6 +76,7 @@ long long inpalprime::p_gen(unsigned long long n)
            }
     }
 
-    
     return prime;
 }
+   
+
