@@ -82,7 +82,6 @@ unsigned long long inpalprime::pn_find(unsigned long long n)
 
 
 
-
 unsigned long long inpalprime::pn_count(unsigned long long l)
 {
     
