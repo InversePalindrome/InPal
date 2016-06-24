@@ -14,12 +14,14 @@ class inpalprime
 {
 
 public:
-    long long pn_find(unsigned long long n);
+    unsigned long long pn_find(unsigned long long n);
+    unsigned long long n_maxfac(unsigned long long m);
     
 private:
-    long long prime=0;
-  
+    unsigned long long prime=0;
+    unsigned long long maxfac=0;
+   
 };
 
 
-#endif /* inpalprime_hpp 
+#endif /* inpalprime_hpp */
