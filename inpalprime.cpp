@@ -84,7 +84,6 @@ unsigned long long inpalprime::pn_find(unsigned long long n)
 
 unsigned long long inpalprime::pn_count(unsigned long long l)
 {
-    
     //defines square root of n
     unsigned long long root=ceil(sqrt(l));
     
@@ -162,6 +161,19 @@ long double inpalprime::pn_den(long double h)
 
 
 
+bool inpalprime::pn_test(unsigned long long k)
+{
+    if(k!=pn_find(k))
+    {
+        return false;
+    }
+    
+    
+    return true;
+}
+
+
+
 unsigned long long inpalprime::n_maxfac(unsigned long long m)
 {
     unsigned long long p=3;
@@ -189,16 +201,11 @@ unsigned long long inpalprime::n_maxfac(unsigned long long m)
 
 
 
-bool inpalprime::pn_test(unsigned long long k)
-{
-    if(k!=pn_find(k))
-    {
-        return false;
-    }
-    
-    
-    return true;
-}
+
+
+
+
+
 
 
 
