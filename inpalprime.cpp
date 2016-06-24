@@ -18,7 +18,7 @@ unsigned long long inpalprime::pn_find(unsigned long long n)
     unsigned long long root=ceil(sqrt(n));
     
     //return values to deal with values of n less than 7
-   switch(n)
+    switch(n)
     {
         case 2:return 2;
         case 3:return 3;
@@ -70,42 +70,16 @@ unsigned long long inpalprime::pn_find(unsigned long long n)
     for(std::vector<bool>::size_type a=p_test.size()-1; a!=1; a--)
     {
         if((p_test[a]))
-           {
-               maxprime=a;
-               break;
-           }
+        {
+            maxprime=a;
+            break;
+        }
     }
-
+    
     
     return maxprime;
 }
 
-
-
-unsigned long long inpalprime::n_maxfac(unsigned long long m)
-{
-    unsigned long long p=3;
-    //removing factors of 2
-    while(m%2==0)
-    {
-        maxfac=2;
-        m=m/2;
-    }
-   
-    //finding possible prime factors
-        while(m!=1)
-        {
-            while(m%p==0)
-            {
-                maxfac=p;
-                m=m/p;
-            }
-            p+=2;
-        }
-    
-    
-    return maxfac;
-}
 
 
 
@@ -172,17 +146,45 @@ unsigned long long inpalprime::pn_count(unsigned long long l)
             primecount++;
         }
     }
-
     
     
     return primecount;
 }
+
+
 
 long double inpalprime::pn_den(long double h)
 {
     primeden=(pn_count(h)/h)*0.5;
     
     return primeden;
+}
+
+
+
+unsigned long long inpalprime::n_maxfac(unsigned long long m)
+{
+    unsigned long long p=3;
+    //removing factors of 2
+    while(m%2==0)
+    {
+        maxfac=2;
+        m=m/2;
+    }
+    
+    //finding possible prime factors
+    while(m!=1)
+    {
+        while(m%p==0)
+        {
+            maxfac=p;
+            m=m/p;
+        }
+        p+=2;
+    }
+    
+    
+    return maxfac;
 }
 
 
