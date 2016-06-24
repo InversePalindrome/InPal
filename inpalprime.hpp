@@ -16,12 +16,18 @@ class inpalprime
 public:
     unsigned long long pn_find(unsigned long long n);
     unsigned long long n_maxfac(unsigned long long m);
+    unsigned long long pn_count(unsigned long long l);
+    long double pn_den(long double h);
+    bool pn_test(unsigned long long k);
     
 private:
-    unsigned long long prime=0;
+    unsigned long long maxprime=0;
     unsigned long long maxfac=0;
+    unsigned long long primecount=0;
+    long double primeden;
    
 };
 
 
 #endif /* inpalprime_hpp */
+
