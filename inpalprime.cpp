@@ -80,3 +80,29 @@ long long inpalprime::pn_find(unsigned long long n)
 }
    
 
+unsigned long long inpalprime::n_maxfac(unsigned long long m)
+{
+    unsigned long long p=3;
+    //removing factors of 2
+    while(m%2==0)
+    {
+        maxfac=2;
+        m=m/2;
+    }
+   
+    //finding possible prime factors
+        while(m!=1)
+        {
+            while(m%p==0)
+            {
+                maxfac=p;
+                m=m/p;
+            }
+            p+=2;
+        }
+    
+    
+    return maxfac;
+}
+
+
