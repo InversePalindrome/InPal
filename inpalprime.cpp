@@ -156,6 +156,7 @@ long double inpalprime::pn_den(long double h)
 {
     primeden=(pn_count(h)/h)*0.5;
     
+    
     return primeden;
 }
 
