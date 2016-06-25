@@ -19,9 +19,11 @@ public:
     unsigned long long pn_count(unsigned long long l);
     long double pn_den(long double h);
     bool pn_test(unsigned long long k);
+    bool pn_twin(unsigned long long a);
+    bool pn_cousin(unsigned long long a);
+    bool pn_sexy(unsigned long long a);
     unsigned long long n_maxfac(unsigned long long m);
 
-    
 private:
     unsigned long long maxprime=0;
     unsigned long long primecount=0;
