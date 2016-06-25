@@ -173,6 +173,59 @@ bool inpalprime::pn_test(unsigned long long k)
 }
 
 
+bool inpalprime::pn_twin(unsigned long long a)
+{
+    if(a==2)
+    {
+        return false;
+    }
+    
+    else if(pn_test(a) && (pn_test(a+2) || pn_test(a-2)))
+    {
+        return true;
+    }
+    
+    
+    return false;
+}
+
+
+
+bool inpalprime::pn_cousin(unsigned long long a)
+{
+    if(a==2)
+    {
+        return false;
+    }
+    
+    else if(pn_test(a) && (pn_test(a+4) || pn_test(a-4)))
+    {
+        return true;
+    }
+            
+    
+    return false;
+}
+
+
+
+bool inpalprime::pn_sexy(unsigned long long a)
+{
+    if(a==2 || a==3)
+    {
+        return false;
+    }
+    
+    else if(pn_test(a) && (pn_test(a+6) || pn_test(a-6)))
+    {
+        return true;
+    }
+    
+    
+    return false;
+}
+
+
 
 unsigned long long inpalprime::n_maxfac(unsigned long long m)
 {
