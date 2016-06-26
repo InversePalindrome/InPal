@@ -14,64 +14,12 @@
 
 unsigned long long inpalprime::pn_find(unsigned long long n)
 {
-    //defines square root of n
-    unsigned long long root=ceil(sqrt(n));
-    
-    //return values to deal with values of n less than 7
-    switch(n)
-    {
-        case 2:return 2;
-        case 3:return 3;
-        case 5:return 5;
-        case 7:return 7;
-    }
-    //stores boolean values for primality testing, 1: prime, 0: not prime
-    std::vector<bool> p_test (n+1, false);
-    
-    //sieve of atkin
-    for(unsigned long long x=1; x<=root; x++)
-    {
-        for(unsigned long long y=1; y<=root; y++)
-        {
-            unsigned long long i=(4*x*x)+(y*y);
-            if (i<=n && (i%12==1 || i%12==5))
-            {
-                p_test[i].flip();
-            }
-            i=(3*x*x)+(y*y);
-            if(i<=n && i%12==7)
-            {
-                p_test[i].flip();
-            }
-            i=(3*x*x)-(y*y);
-            if(x>y && i<=n && i%12==11)
-            {
-                p_test[i].flip();
-            }
-        }
-    }
-    
-    //marks 2,3,5 and 7 as prime numbers
-    p_test[2]=p_test[3]=p_test[5]=p_test[7]=true;
-    
-    //marks all multiples of primes as non primes
-    for(unsigned long long r=5; r<=root; r++)
-    {
-        if((p_test[r]))
-        {
-            for(unsigned long long j=r*r; j<=n; j+=r*r)
-            {
-                p_test[j]=false;
-            }
-        }
-    }
-    
     //finds the highest possible prime under n
-    for(std::vector<bool>::size_type a=p_test.size()-1; a!=1; a--)
+    for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
     {
-        if((p_test[a]))
+        if(atkinsieve(n)[it])
         {
-            maxprime=a;
+            maxprime=it;
             break;
         }
     }
@@ -82,64 +30,12 @@ unsigned long long inpalprime::pn_find(unsigned long long n)
 
 
 
-unsigned long long inpalprime::pn_count(unsigned long long l)
+unsigned long long inpalprime::pn_count(unsigned long long n)
 {
-    //defines square root of n
-    unsigned long long root=ceil(sqrt(l));
-    
-    //return values to deal with values of l less than 7
-    switch(l)
+    //count the number of primes under n
+    for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
     {
-        case 2:return 1;
-        case 3:return 2;
-        case 5:return 3;
-        case 7:return 4;
-    }
-    //stores boolean values for primality testing, 1: prime, 0: not prime
-    std::vector<bool> p_test (l+1, false);
-    
-    //sieve of atkin
-    for(unsigned long long x=1; x<=root; x++)
-    {
-        for(unsigned long long y=1; y<=root; y++)
-        {
-            unsigned long long i=(4*x*x)+(y*y);
-            if (i<=l && (i%12==1 || i%12==5))
-            {
-                p_test[i].flip();
-            }
-            i=(3*x*x)+(y*y);
-            if(i<=l && i%12==7)
-            {
-                p_test[i].flip();
-            }
-            i=(3*x*x)-(y*y);
-            if(x>y && i<=l && i%12==11)
-            {
-                p_test[i].flip();
-            }
-        }
-    }
-    
-    //marks 2,3,5 and 7 as prime numbers
-    p_test[2]=p_test[3]=p_test[5]=p_test[7]=true;
-    
-    //marks all multiples of primes as non primes
-    for(unsigned long long r=5; r<=root; r++)
-    {
-        if((p_test[r]))
-        {
-            for(unsigned long long j=r*r; j<=l; j+=r*r)
-            {
-                p_test[j]=false;
-            }
-        }
-    }
-    
-    //count the number of primes under l+1
-    for(std::vector<bool>::size_type it=p_test.size()-1; it!=1; it--)
-    {
-        if((p_test[it]))
+        if(atkinsieve(n)[it])
         {
             primecount++;
         }
@@ -153,7 +49,8 @@ unsigned long long inpalprime::pn_count(unsigned long long l)
 
 long double inpalprime::pn_den(long double h)
 {
-    primeden=(pn_count(h)/h)*0.5;
+   //density of primes from 1 to  h
+    primeden=(pn_count(h)/h);
     
     
     return primeden;
@@ -161,9 +58,10 @@ long double inpalprime::pn_den(long double h)
 
 
 
-bool inpalprime::pn_test(unsigned long long k)
+bool inpalprime::pn_test(unsigned long long a)
 {
-    if(k!=pn_find(k))
+    //primality test based on the sieve of atkin
+    if(a!=pn_find(a))
     {
         return false;
     }
@@ -171,6 +69,7 @@ bool inpalprime::pn_test(unsigned long long k)
     
     return true;
 }
+
 
 
 bool inpalprime::pn_twin(unsigned long long a)
@@ -254,14 +153,54 @@ unsigned long long inpalprime::n_maxfac(unsigned long long m)
 
 
 
-
-
-
-
-
-
-
-
+std::vector<bool> inpalprime::atkinsieve(unsigned long long m)
+{
+    std::vector<bool> p_test(m+1, false);
+    
+    //defines square root of n
+    unsigned long long root=ceil(sqrt(m));
+    
+    //sieve axioms
+    for(unsigned long long x=1; x<=root; x++)
+    {
+        for(unsigned long long y=1; y<=root; y++)
+        {
+            unsigned long long i=(4*x*x)+(y*y);
+            if (i<=m && (i%12==1 || i%12==5))
+            {
+                p_test[i].flip();
+            }
+            i=(3*x*x)+(y*y);
+            if(i<=m && i%12==7)
+            {
+                p_test[i].flip();
+            }
+            i=(3*x*x)-(y*y);
+            if(x>y && i<=m && i%12==11)
+            {
+                p_test[i].flip();
+            }
+        }
+    }
+    
+    //marks 2,3,5 and 7 as prime numbers
+    p_test[2]=p_test[3]=p_test[5]=p_test[7]=true;
+    
+    //marks all multiples of primes as non primes
+    for(unsigned long long r=5; r<=root; r++)
+    {
+        if((p_test[r]))
+        {
+            for(unsigned long long j=r*r; j<=m; j+=r*r)
+            {
+                p_test[j]=false;
+            }
+        }
+    }
+    
+    
+    return p_test;
+}
 
 
 
