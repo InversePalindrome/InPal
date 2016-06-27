@@ -10,6 +10,7 @@
 #include "inpalprime.hpp"
 #include <cmath>
 #include <vector>
+#include <string>
 
 
 unsigned long long inpalprime::pn_find(unsigned long long n)
@@ -126,6 +127,24 @@ bool inpalprime::pn_sexy(unsigned long long a)
 
 
 
+unsigned long long inpalprime::pn_pal(unsigned long long n)
+{
+    //finds the highest palindromic prime equal or less than n
+    for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
+    {
+        if(atkinsieve(n)[it] && pal_test(it))
+      {
+          pal=it;
+          break;
+      }
+    }
+   
+   
+    return pal;
+}
+
+
+
 unsigned long long inpalprime::n_maxfac(unsigned long long m)
 {
     unsigned long long p=3;
@@ -203,4 +222,19 @@ std::vector<bool> inpalprime::atkinsieve(unsigned long long m)
 }
 
 
+
+bool inpalprime::pal_test(unsigned long long m)
+{
+    //converting m to a string
+    ull=std::to_string(m);
+    
+    //checking if the reverse of ull is equal to ull
+    if(ull!=std::string(ull.rbegin(), ull.rend()))
+       {
+           return false;
+       }
+    
+    
+    return true;
+}
 
