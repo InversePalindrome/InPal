@@ -10,8 +10,8 @@
 #ifndef inpalprime_hpp
 #define inpalprime_hpp
 
-#include<vector>
-#include<string>
+#include <vector>
+#include <string>
 
 
 class inpalprime
