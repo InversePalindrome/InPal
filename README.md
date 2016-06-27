@@ -1,6 +1,6 @@
 # Prime-Numbers
 
-A c++ library for dealing with Prime Numbers. Currently uses 8 different functions that are bases in the Sieve of Atkin:
+A c++ library for dealing with Prime Numbers. Currently uses 8 different functions that are based in the Sieve of Atkin:
 
 -pn_find(n):Finds the highest prime number less or equal to the input given.
 
