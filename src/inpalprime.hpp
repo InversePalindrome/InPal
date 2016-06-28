@@ -26,16 +26,20 @@ public:
     bool pn_cousin(unsigned long long a);
     bool pn_sexy(unsigned long long a);
     unsigned long long pn_pal(unsigned long long n);
-    unsigned long long n_maxfac(unsigned long long m);
+    unsigned long long n_fac(unsigned long long f);
+    unsigned long long n_cfac(unsigned long long f);
 
 private:
     std::vector<bool> atkinsieve(unsigned long long m);
-    bool pal_test(unsigned long long m);
+    std::vector<unsigned long long> factorizer(unsigned long long f);
+    bool pal_test(unsigned long long n);
     unsigned long long maxprime=0;
     unsigned long long primecount=0;
     long double primeden;
+    unsigned long long pal;
     std::string ull;
-    unsigned long long maxfac=0;
+    unsigned long long maxfac;
+    unsigned long long cfac;
     
 };
 
