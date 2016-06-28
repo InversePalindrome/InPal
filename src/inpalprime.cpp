@@ -145,29 +145,22 @@ unsigned long long inpalprime::pn_pal(unsigned long long n)
 
 
 
-unsigned long long inpalprime::n_maxfac(unsigned long long m)
+unsigned long long inpalprime::n_fac(unsigned long long f)
 {
-    unsigned long long p=3;
-    //removing factors of 2
-    while(m%2==0)
-    {
-        maxfac=2;
-        m=m/2;
-    }
-    
-    //finding possible prime factors
-    while(m!=1)
-    {
-        while(m%p==0)
-        {
-            maxfac=p;
-            m=m/p;
-        }
-        p+=2;
-    }
+    maxfac=factorizer(f).back();
     
     
     return maxfac;
+}
+
+
+
+unsigned long long inpalprime::n_cfac(unsigned long long f)
+{
+    cfac=factorizer(f).size();
+    
+    
+    return cfac;
 }
 
 
@@ -222,11 +215,38 @@ std::vector<bool> inpalprime::atkinsieve(unsigned long long m)
 }
 
 
+std::vector<unsigned long long> inpalprime::factorizer(unsigned long long f)
+{
+    std::vector<unsigned long long> p_fac;
+    unsigned long long p=3;
+    
+    //removing factors of 2
+    while(f%2==0)
+    {
+        p_fac.push_back(2);
+        f=f/2;
+    }
+    
+    while(f!=1)
+    {
+        while(f%p==0)
+        {
+            p_fac.push_back(p);
+            f=f/p;
+        }
+        p+=2;
+    }
+    
+    
+    return p_fac;
+}
 
-bool inpalprime::pal_test(unsigned long long m)
+
+
+bool inpalprime::pal_test(unsigned long long n)
 {
     //converting m to a string
-    ull=std::to_string(m);
+    ull=std::to_string(n);
     
     //checking if the reverse of ull is equal to ull
     if(ull!=std::string(ull.rbegin(), ull.rend()))
