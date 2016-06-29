@@ -15,7 +15,7 @@
 
 unsigned long long inpalprime::pn_find(unsigned long long n)
 {
-    //finds the highest possible prime under n
+    //finds the highest possible prime less or equal to n
     for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
     {
         if(atkinsieve(n)[it])
@@ -33,7 +33,7 @@ unsigned long long inpalprime::pn_find(unsigned long long n)
 
 unsigned long long inpalprime::pn_count(unsigned long long n)
 {
-    //count the number of primes under n
+    //counts the number of primes less or equal to n
     for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
     {
         if(atkinsieve(n)[it])
@@ -50,7 +50,7 @@ unsigned long long inpalprime::pn_count(unsigned long long n)
 
 long double inpalprime::pn_den(long double h)
 {
-   //density of primes from 1 to  h
+   //calculates density of primes from 1 to  h
     primeden=(pn_count(h)/h);
     
     
@@ -129,7 +129,7 @@ bool inpalprime::pn_sexy(unsigned long long a)
 
 unsigned long long inpalprime::pn_pal(unsigned long long n)
 {
-    //finds the highest palindromic prime equal or less than n
+    //finds the highest palindromic prime less or equal to n
     for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
     {
         if(atkinsieve(n)[it] && pal_test(it))
@@ -147,6 +147,7 @@ unsigned long long inpalprime::pn_pal(unsigned long long n)
 
 unsigned long long inpalprime::n_fac(unsigned long long f)
 {
+    //finds the highest prime factor less or equal to f
     maxfac=factorizer(f).back();
     
     
@@ -157,6 +158,7 @@ unsigned long long inpalprime::n_fac(unsigned long long f)
 
 unsigned long long inpalprime::n_cfac(unsigned long long f)
 {
+    //counts the number of prime factors that compose f, if f is prime the returned value is 1
     cfac=factorizer(f).size();
     
     
@@ -169,7 +171,7 @@ std::vector<bool> inpalprime::atkinsieve(unsigned long long m)
 {
     std::vector<bool> p_test(m+1, false);
     
-    //defines square root of n
+    //defines square root of m
     unsigned long long root=ceil(sqrt(m));
     
     //sieve axioms
@@ -220,13 +222,14 @@ std::vector<unsigned long long> inpalprime::factorizer(unsigned long long f)
     std::vector<unsigned long long> p_fac;
     unsigned long long p=3;
     
-    //removing factors of 2
+    //removes factors of 2
     while(f%2==0)
     {
         p_fac.push_back(2);
         f=f/2;
     }
     
+    //finds prime factors of f
     while(f!=1)
     {
         while(f%p==0)
@@ -245,7 +248,7 @@ std::vector<unsigned long long> inpalprime::factorizer(unsigned long long f)
 
 bool inpalprime::pal_test(unsigned long long n)
 {
-    //converting m to a string
+    //converts m to a string
     ull=std::to_string(n);
     
     //checking if the reverse of ull is equal to ull
