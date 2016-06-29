@@ -26,7 +26,7 @@
 - pn_pal(n): Finds the highest palindromic prime equal or less than n.
 
 
-- n_maxfac(f): Finds the highest prime factor of a given number.
+- n_fac(f): Finds the highest prime factor of a given number.
 
 
 - n_cfac(f): Counts the number of prime factors that composes a number(including f).
