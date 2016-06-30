@@ -33,7 +33,7 @@ private:
     std::vector<bool> atkinsieve(long long m);
     std::vector<long long> factorizer(long long f);
     bool pal_test(long long n);
-    long long maxprime=0;
+    long long maxprime;
     long long primecount;
     long double primeden;
     long long pal;
