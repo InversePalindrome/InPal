@@ -37,7 +37,7 @@ private:
     long long primecount;
     long double primeden;
     long long pal;
-    std::string ull;
+    std::string rev;
     long long maxfac;
     long long cfac;
     
