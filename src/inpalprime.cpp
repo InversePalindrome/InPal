@@ -11,14 +11,17 @@
 #include <cmath>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 
-unsigned long long inpalprime::pn_find(unsigned long long n)
+long long inpalprime::pn_find(long long n)
 {
+    auto p_find=atkinsieve(n);
+    
     //finds the highest possible prime less or equal to n
-    for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
+    for(std::vector<bool>::size_type it=p_find.size(); it!=1; it--)
     {
-        if(atkinsieve(n)[it])
+        if(p_find[it])
         {
             maxprime=it;
             break;
@@ -31,16 +34,12 @@ unsigned long long inpalprime::pn_find(unsigned long long n)
 
 
 
-unsigned long long inpalprime::pn_count(unsigned long long n)
+long long inpalprime::pn_count(long long n)
 {
+    auto p_count=atkinsieve(n);
+    
     //counts the number of primes less or equal to n
-    for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
-    {
-        if(atkinsieve(n)[it])
-        {
-            primecount++;
-        }
-    }
+    primecount=std::count(p_count.begin(), p_count.end(), true);
     
     
     return primecount;
@@ -50,7 +49,7 @@ unsigned long long inpalprime::pn_count(unsigned long long n)
 
 long double inpalprime::pn_den(long double h)
 {
-   //calculates density of primes from 1 to  h
+    //calculates density of primes from 1 to  h
     primeden=(pn_count(h)/h);
     
     
@@ -59,7 +58,7 @@ long double inpalprime::pn_den(long double h)
 
 
 
-bool inpalprime::pn_test(unsigned long long a)
+bool inpalprime::pn_test(long long a)
 {
     //primality test based on the sieve of atkin
     if(a!=pn_find(a))
@@ -73,7 +72,7 @@ bool inpalprime::pn_test(unsigned long long a)
 
 
 
-bool inpalprime::pn_twin(unsigned long long a)
+bool inpalprime::pn_twin(long long a)
 {
     if(a==2)
     {
@@ -91,7 +90,7 @@ bool inpalprime::pn_twin(unsigned long long a)
 
 
 
-bool inpalprime::pn_cousin(unsigned long long a)
+bool inpalprime::pn_cousin(long long a)
 {
     if(a==2)
     {
@@ -102,14 +101,14 @@ bool inpalprime::pn_cousin(unsigned long long a)
     {
         return true;
     }
-            
+    
     
     return false;
 }
 
 
 
-bool inpalprime::pn_sexy(unsigned long long a)
+bool inpalprime::pn_sexy(long long a)
 {
     if(a==2 || a==3)
     {
@@ -127,25 +126,27 @@ bool inpalprime::pn_sexy(unsigned long long a)
 
 
 
-unsigned long long inpalprime::pn_pal(unsigned long long n)
+long long inpalprime::pn_pal(long long n)
 {
+    auto p_pal=atkinsieve(n);
+    
     //finds the highest palindromic prime less or equal to n
-    for(std::vector<bool>::size_type it=atkinsieve(n).size()-1; it!=1; it--)
+    for(std::vector<bool>::size_type it=p_pal.size(); it!=1; it--)
     {
-        if(atkinsieve(n)[it] && pal_test(it))
-      {
-          pal=it;
-          break;
-      }
+        if(p_pal[it] && pal_test(it))
+        {
+            pal=it;
+            break;
+        }
     }
-   
-   
+    
+    
     return pal;
 }
 
 
 
-unsigned long long inpalprime::n_fac(unsigned long long f)
+long long inpalprime::n_fac(long long f)
 {
     //finds the highest prime factor less or equal to f
     maxfac=factorizer(f).back();
@@ -156,7 +157,7 @@ unsigned long long inpalprime::n_fac(unsigned long long f)
 
 
 
-unsigned long long inpalprime::n_cfac(unsigned long long f)
+long long inpalprime::n_cfac(long long f)
 {
     //counts the number of prime factors that compose f, if f is prime the returned value is 1
     cfac=factorizer(f).size();
@@ -167,7 +168,7 @@ unsigned long long inpalprime::n_cfac(unsigned long long f)
 
 
 
-std::vector<bool> inpalprime::atkinsieve(unsigned long long m)
+std::vector<bool> inpalprime::atkinsieve(long long m)
 {
     std::vector<bool> p_test(m+1, false);
     
@@ -177,9 +178,9 @@ std::vector<bool> inpalprime::atkinsieve(unsigned long long m)
     //sieve axioms
     for(unsigned long long x=1; x<=root; x++)
     {
-        for(unsigned long long y=1; y<=root; y++)
+        for(long long y=1; y<=root; y++)
         {
-            unsigned long long i=(4*x*x)+(y*y);
+            long long i=(4*x*x)+(y*y);
             if (i<=m && (i%12==1 || i%12==5))
             {
                 p_test[i].flip();
@@ -201,11 +202,11 @@ std::vector<bool> inpalprime::atkinsieve(unsigned long long m)
     p_test[2]=p_test[3]=p_test[5]=p_test[7]=true;
     
     //marks all multiples of primes as non primes
-    for(unsigned long long r=5; r<=root; r++)
+    for(long long r=5; r<=root; r++)
     {
         if((p_test[r]))
         {
-            for(unsigned long long j=r*r; j<=m; j+=r*r)
+            for(long long j=r*r; j<=m; j+=r*r)
             {
                 p_test[j]=false;
             }
@@ -217,10 +218,10 @@ std::vector<bool> inpalprime::atkinsieve(unsigned long long m)
 }
 
 
-std::vector<unsigned long long> inpalprime::factorizer(unsigned long long f)
+std::vector<long long> inpalprime::factorizer(long long f)
 {
-    std::vector<unsigned long long> p_fac;
-    unsigned long long p=3;
+    std::vector<long long> p_fac;
+    long long p=3;
     
     //removes factors of 2
     while(f%2==0)
@@ -246,18 +247,20 @@ std::vector<unsigned long long> inpalprime::factorizer(unsigned long long f)
 
 
 
-bool inpalprime::pal_test(unsigned long long n)
+bool inpalprime::pal_test(long long n)
 {
     //converts m to a string
     ull=std::to_string(n);
     
-    //checking if the reverse of ull is equal to ull
-    if(ull!=std::string(ull.rbegin(), ull.rend()))
-       {
-           return false;
-       }
+    //checks if the reverse of ull is equal to ull
+    for(int i=0; i<ull.size()/2; i++)
+    {
+        if(ull[i]!=ull[ull.size()-1-i])
+        {
+            return false;
+        }
+    }
     
     
     return true;
 }
-
