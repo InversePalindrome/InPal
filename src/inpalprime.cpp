@@ -74,16 +74,19 @@ bool inpalprime::pn_test(long long a)
 
 bool inpalprime::pn_twin(long long a)
 {
+    auto p_tw=atkinsieve(a+2);
+    
     if(a==2)
     {
         return false;
     }
     
-    else if(pn_test(a) && (pn_test(a+2) || pn_test(a-2)))
+    //checks if a+2 or a-2 is also prime
+    else if(p_tw[p_tw.size()-3] && (p_tw[p_tw.size()-1] || p_tw[p_tw.size()-5]))
     {
         return true;
     }
-    
+
     
     return false;
 }
@@ -92,16 +95,19 @@ bool inpalprime::pn_twin(long long a)
 
 bool inpalprime::pn_cousin(long long a)
 {
+   auto p_co=atkinsieve(a+4);
+    
     if(a==2)
     {
         return false;
     }
     
-    else if(pn_test(a) && (pn_test(a+4) || pn_test(a-4)))
+    //checks if a+4 or a-4 is also prime
+    else if(p_co[p_co.size()-5] && (p_co[p_co.size()-1] || p_co[p_co.size()-9]))
     {
         return true;
     }
-    
+
     
     return false;
 }
@@ -110,16 +116,19 @@ bool inpalprime::pn_cousin(long long a)
 
 bool inpalprime::pn_sexy(long long a)
 {
+    auto p_se=atkinsieve(a+6);
+    
     if(a==2 || a==3)
     {
         return false;
     }
     
-    else if(pn_test(a) && (pn_test(a+6) || pn_test(a-6)))
+    //checks if a+6 or a-6 is also prime
+    else if(p_se[p_se.size()-7] && (p_se[p_se.size()-1] || p_se[p_se.size()-13]))
     {
         return true;
     }
-    
+
     
     return false;
 }
