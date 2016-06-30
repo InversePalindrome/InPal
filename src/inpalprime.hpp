@@ -16,30 +16,30 @@
 
 class inpalprime
 {
-
+    
 public:
-    unsigned long long pn_find(unsigned long long n);
-    unsigned long long pn_count(unsigned long long n);
+    long long pn_find(long long n);
+    long long pn_count(long long n);
     long double pn_den(long double h);
-    bool pn_test(unsigned long long a);
-    bool pn_twin(unsigned long long a);
-    bool pn_cousin(unsigned long long a);
-    bool pn_sexy(unsigned long long a);
-    unsigned long long pn_pal(unsigned long long n);
-    unsigned long long n_fac(unsigned long long f);
-    unsigned long long n_cfac(unsigned long long f);
-
+    bool pn_test(long long a);
+    bool pn_twin(long long a);
+    bool pn_cousin(long long a);
+    bool pn_sexy(long long a);
+    long long pn_pal(long long n);
+    long long n_fac(long long f);
+    long long n_cfac(long long f);
+  
 private:
-    std::vector<bool> atkinsieve(unsigned long long m);
-    std::vector<unsigned long long> factorizer(unsigned long long f);
-    bool pal_test(unsigned long long n);
-    unsigned long long maxprime=0;
-    unsigned long long primecount=0;
+    std::vector<bool> atkinsieve(long long m);
+    std::vector<long long> factorizer(long long f);
+    bool pal_test(long long n);
+    long long maxprime=0;
+    long long primecount;
     long double primeden;
-    unsigned long long pal;
+    long long pal;
     std::string ull;
-    unsigned long long maxfac;
-    unsigned long long cfac;
+    long long maxfac;
+    long long cfac;
     
 };
 
