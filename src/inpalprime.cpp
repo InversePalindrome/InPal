@@ -249,13 +249,13 @@ std::vector<long long> inpalprime::factorizer(long long f)
 
 bool inpalprime::pal_test(long long n)
 {
-    //converts m to a string
-    ull=std::to_string(n);
+    //converts n to a string
+    rev=std::to_string(n);
     
-    //checks if the reverse of ull is equal to ull
-    for(int i=0; i<ull.size()/2; i++)
+    //checks if the reverse of rev is equal to rev
+    for(int i=0; i<rev.size()/2; i++)
     {
-        if(ull[i]!=ull[ull.size()-1-i])
+        if(rev[i]!=rev[rev.size()-1-i])
         {
             return false;
         }
