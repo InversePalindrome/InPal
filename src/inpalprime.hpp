@@ -14,34 +14,24 @@
 #include <string>
 
 
-class inpalprime
+namespace inpalprime
 {
+    long long max_prime(long long n);
+    long long count_primes(long long n);
+    long double prime_density(long double h);
+    bool prime_test(long long p);
+    bool twin_test(long long p);
+    bool cousin_test(long long p);
+    bool sexy_test(long long p);
+    long long max_palprime(long long n);
+    long long max_factor(long long f);
+    long long count_factors(long long f);
     
-public:
-    long long pn_find(long long n);
-    long long pn_count(long long n);
-    long double pn_den(long double h);
-    bool pn_test(long long a);
-    bool pn_twin(long long a);
-    bool pn_cousin(long long a);
-    bool pn_sexy(long long a);
-    long long pn_pal(long long n);
-    long long n_fac(long long f);
-    long long n_cfac(long long f);
-  
-private:
-    std::vector<bool> atkinsieve(long long m);
+    std::vector<bool> prime_sieve(long long m);
     std::vector<long long> factorizer(long long f);
     bool pal_test(long long n);
-    long long maxprime;
-    long long primecount;
-    long double primeden;
-    long long pal;
-    std::string rev;
-    long long maxfac;
-    long long cfac;
-    
-};
+}
+
 
 
 #endif /* inpalprime_hpp */
