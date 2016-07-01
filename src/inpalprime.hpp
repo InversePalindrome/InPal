@@ -14,7 +14,7 @@
 #include <string>
 
 
-namespace inpalprime
+namespace inpal
 {
     long long max_prime(long long n);
     long long count_primes(long long n);
