@@ -14,7 +14,7 @@
 #include <algorithm>
 
 
-long long inpalprime::max_prime(long long n)
+long long inpal::max_prime(long long n)
 {
     auto primes = prime_sieve(n);
     auto it = std::find(primes.rbegin(), primes.rend(), true);
@@ -23,7 +23,7 @@ long long inpalprime::max_prime(long long n)
 }
 
 
-long long inpalprime::count_primes(long long n)
+long long inpal::count_primes(long long n)
 {
     auto primes = prime_sieve(n);
     
@@ -31,19 +31,19 @@ long long inpalprime::count_primes(long long n)
 }
 
 
-long double inpalprime::prime_density(long double h)
+long double inpal::prime_density(long double h)
 {
     return count_primes(h)/h;
 }
 
 
-bool inpalprime::prime_test(long long p)
+bool inpal::prime_test(long long p)
 {
     return p == max_prime(p);
 }
 
 
-bool inpalprime::twin_test(long long p)
+bool inpal::twin_test(long long p)
 {
     auto primes = prime_sieve(p+2);
     
@@ -51,7 +51,7 @@ bool inpalprime::twin_test(long long p)
 }
 
 
-bool inpalprime::cousin_test(long long p)
+bool inpal::cousin_test(long long p)
 {
     auto primes = prime_sieve(p+4);
     
@@ -59,7 +59,7 @@ bool inpalprime::cousin_test(long long p)
 }
 
 
-bool inpalprime::sexy_test(long long p)
+bool inpal::sexy_test(long long p)
 {
     auto primes = prime_sieve(p+6);
     
@@ -67,7 +67,7 @@ bool inpalprime::sexy_test(long long p)
 }
 
 
-long long inpalprime::max_palprime(long long n)
+long long inpal::max_palprime(long long n)
 {
     auto primes = prime_sieve(n);
    
@@ -83,19 +83,19 @@ long long inpalprime::max_palprime(long long n)
 }
 
                            
-long long inpalprime::max_factor(long long f)
+long long inpal::max_factor(long long f)
 {
     return factorizer(f).back();
 }
                                                             
                                                             
-long long inpalprime::count_factors(long long f)
+long long inpal::count_factors(long long f)
 {
     return factorizer(f).size();
 }
       
 
-std::vector<bool> inpalprime::prime_sieve(long long m)
+std::vector<bool> inpal::prime_sieve(long long m)
 {
     std::vector<bool> p_test(m+1, false);
     
@@ -144,7 +144,7 @@ std::vector<bool> inpalprime::prime_sieve(long long m)
 }
 
 
-std::vector<long long> inpalprime::factorizer(long long f)
+std::vector<long long> inpal::factorizer(long long f)
 {
     std::vector<long long> p_fac;
     long long p = 3;
@@ -171,7 +171,7 @@ std::vector<long long> inpalprime::factorizer(long long f)
 }
 
 
-bool inpalprime::pal_test(long long n)
+bool inpal::pal_test(long long n)
 {
     //converts n to a string
     std::string rev = std::to_string(n);
