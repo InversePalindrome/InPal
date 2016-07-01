@@ -67,7 +67,6 @@ bool inpalprime::sexy_test(long long p)
 }
 
 
-
 long long inpalprime::max_palprime(long long n)
 {
     auto primes = prime_sieve(n);
@@ -84,7 +83,6 @@ long long inpalprime::max_palprime(long long n)
 }
 
                            
-
 long long inpalprime::max_factor(long long f)
 {
     return factorizer(f).back();
@@ -171,7 +169,6 @@ std::vector<long long> inpalprime::factorizer(long long f)
     
     return p_fac;
 }
-
 
 
 bool inpalprime::pal_test(long long n)
