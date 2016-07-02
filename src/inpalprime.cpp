@@ -170,13 +170,10 @@ bool inpal::pal_test(long long n)
     std::string rev = std::to_string(n);
     
     //checks if the reverse of rev is equal to rev
-    for(int i=0; i<rev.size()/2; i++)
+    if(std::equal(rev.begin(), rev.begin()+rev.size()/2, rev.rbegin()))
     {
-        if(rev[i]!=rev[rev.size()-1-i])
-        {
-            return false;
-        }
+        return true;
     }
     
-    return true;
+    return false;
 }
