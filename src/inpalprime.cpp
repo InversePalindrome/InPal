@@ -147,24 +147,17 @@ std::vector<bool> inpal::prime_sieve(long long m)
 std::vector<long long> inpal::factorizer(long long f)
 {
     std::vector<long long> p_fac;
-    long long p = 3;
+    long long p = 2;
     
-    //removes factors of 2
-    while(f%2==0)
-    {
-        p_fac.push_back(2);
-        f=f/2;
-    }
-    
-    //finds prime factors of f
-    while(f!=1)
+    //trial division
+    while(p<=f)
     {
         while(f%p==0)
         {
             p_fac.push_back(p);
             f=f/p;
         }
-        p+=2;
+        p+= p==2 ? 1 : 2;
     }
     
     return p_fac;
