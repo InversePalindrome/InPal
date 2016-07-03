@@ -14,7 +14,7 @@
 #include <algorithm>
 
 
-long long inpal::max_prime(long long n)
+std::size_t inpal::max_prime(std::size_t n)
 {
     auto primes = prime_sieve(n);
     auto it = std::find(primes.rbegin(), primes.rend(), true);
@@ -23,7 +23,7 @@ long long inpal::max_prime(long long n)
 }
 
 
-long long inpal::count_primes(long long n)
+std::size_t inpal::count_primes(std::size_t n)
 {
     auto primes = prime_sieve(n);
     
@@ -31,19 +31,19 @@ long long inpal::count_primes(long long n)
 }
 
 
-long double inpal::prime_density(long double h)
+double inpal::prime_density(double h)
 {
     return count_primes(h)/h;
 }
 
 
-bool inpal::prime_test(long long p)
+bool inpal::prime_test(std::size_t p)
 {
     return p == max_prime(p);
 }
 
 
-bool inpal::twin_test(long long p)
+bool inpal::twin_test(std::size_t p)
 {
     auto primes = prime_sieve(p+2);
     
@@ -51,7 +51,7 @@ bool inpal::twin_test(long long p)
 }
 
 
-bool inpal::cousin_test(long long p)
+bool inpal::cousin_test(std::size_t p)
 {
     auto primes = prime_sieve(p+4);
     
@@ -59,7 +59,7 @@ bool inpal::cousin_test(long long p)
 }
 
 
-bool inpal::sexy_test(long long p)
+bool inpal::sexy_test(std::size_t p)
 {
     auto primes = prime_sieve(p+6);
     
@@ -67,56 +67,52 @@ bool inpal::sexy_test(long long p)
 }
 
 
-long long inpal::max_palprime(long long n)
+std::size_t inpal::max_palprime(std::size_t n)
 {
     auto primes = prime_sieve(n);
-   
-    for(std::vector<bool>::size_type it=primes.size()-1; it!=1; it--)
-    {
-        if(primes[it] && pal_test(it))
-        {
-            return it;
-        }
-    }
-    
-    return 0;
+        
+    for(std::size_t i=n; i>=2; --i) if(primes[i] && pal_test(i)) return i;
+        
+    return 2;
 }
 
-                           
-long long inpal::max_factor(long long f)
+
+std::size_t inpal::max_factor(std::size_t f)
 {
     return factorizer(f).back();
 }
-                                                            
-                                                            
-long long inpal::count_factors(long long f)
+
+
+std::size_t inpal::count_factors(std::size_t f)
 {
     return factorizer(f).size();
 }
-      
 
-std::vector<bool> inpal::prime_sieve(long long m)
+
+std::vector<bool> inpal::prime_sieve(std::size_t m)
 {
     std::vector<bool> p_test(m+1, false);
     
     //defines square root of m
-    unsigned long long root = ceil(sqrt(m));
+    std::size_t root = ceil(sqrt(m));
     
     //sieve axioms
-    for(unsigned long long x=1; x<=root; x++)
+    for(std::size_t x=1; x<=root; x++)
     {
-        for(long long y=1; y<=root; y++)
+        for(std::size_t y=1; y<=root; y++)
         {
-            long long i=(4*x*x)+(y*y);
+            std::size_t i= (4*x*x)+(y*y);
             if (i<=m && (i%12==1 || i%12==5))
             {
                 p_test[i].flip();
             }
+            
             i=(3*x*x)+(y*y);
             if(i<=m && i%12==7)
             {
                 p_test[i].flip();
             }
+            
             i=(3*x*x)-(y*y);
             if(x>y && i<=m && i%12==11)
             {
@@ -129,11 +125,11 @@ std::vector<bool> inpal::prime_sieve(long long m)
     p_test[2]=p_test[3]=p_test[5]=p_test[7]=true;
     
     //marks all multiples of primes as non primes
-    for(long long r=5; r<=root; r++)
+    for(std::size_t r=5; r<=root; r++)
     {
         if((p_test[r]))
         {
-            for(long long j=r*r; j<=m; j+=r*r)
+            for(std::size_t j=r*r; j<=m; j+=r*r)
             {
                 p_test[j]=false;
             }
@@ -144,10 +140,10 @@ std::vector<bool> inpal::prime_sieve(long long m)
 }
 
 
-std::vector<long long> inpal::factorizer(long long f)
+std::vector<std::size_t> inpal::factorizer(std::size_t f)
 {
-    std::vector<long long> p_fac;
-    long long p = 2;
+    std::vector<std::size_t> p_fac;
+    std::size_t p = 2;
     
     //trial division
     while(p<=f)
@@ -164,7 +160,7 @@ std::vector<long long> inpal::factorizer(long long f)
 }
 
 
-bool inpal::pal_test(long long n)
+bool inpal::pal_test(std::size_t n)
 {
     //converts n to a string
     std::string rev = std::to_string(n);
