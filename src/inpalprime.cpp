@@ -14,107 +14,107 @@
 #include <algorithm>
 
 
-std::size_t inpal::max_prime(std::size_t n)
+template <class T> T  inpal::prime<T>::max_prime(T range)
 {
-    auto primes = prime_sieve(n);
+    auto primes = prime_sieve(range);
     auto it = std::find(primes.rbegin(), primes.rend(), true);
     
     return primes.size()-std::distance(primes.rbegin(), it)-1;
 }
 
 
-std::size_t inpal::count_primes(std::size_t n)
+template <class T> T inpal::prime<T>::count_primes(T range)
 {
-    auto primes = prime_sieve(n);
+    auto primes = prime_sieve(range);
     
     return std::count(primes.begin(), primes.end(), true);
 }
 
 
-double inpal::prime_density(double h)
+template <class T> double inpal::prime<T>::prime_density(double range)
 {
-    return count_primes(h)/h;
+    return count_primes(range)/range;
 }
 
 
-bool inpal::prime_test(std::size_t p)
+template <class T> bool inpal::prime<T>::prime_test(T p)
 {
     return p == max_prime(p);
 }
 
 
-bool inpal::twin_test(std::size_t p)
+template <class T> bool inpal::prime<T>::twin_test(T num)
 {
-    auto primes = prime_sieve(p+2);
+    auto primes = prime_sieve(num+2);
     
-    return p!=2 && primes[primes.size()-3] && (primes[primes.size()-1] || primes[primes.size()-5]);
+    return num!=2 && primes[primes.size()-3] && (primes[primes.size()-1] || primes[primes.size()-5]);
 }
 
 
-bool inpal::cousin_test(std::size_t p)
+template <class T> bool inpal::prime<T>::cousin_test(T num)
 {
-    auto primes = prime_sieve(p+4);
+    auto primes = prime_sieve(num+4);
     
-    return  p!=2 && primes[primes.size()-5] && (primes[primes.size()-1] || primes[primes.size()-9]);
+    return  num!=2 && primes[primes.size()-5] && (primes[primes.size()-1] || primes[primes.size()-9]);
 }
 
 
-bool inpal::sexy_test(std::size_t p)
+template <class T> bool inpal::prime<T>::sexy_test(T num)
 {
-    auto primes = prime_sieve(p+6);
+    auto primes = prime_sieve(num+6);
     
-    return (p!=2 && p!=3) && primes[primes.size()-7] && (primes[primes.size()-1] || primes[primes.size()-13]);
+    return (num!=2 && num!=3) && primes[primes.size()-7] && (primes[primes.size()-1] || primes[primes.size()-13]);
 }
 
 
-std::size_t inpal::max_palprime(std::size_t n)
+template <class T> T inpal::prime<T>::max_palprime(T range)
 {
-    auto primes = prime_sieve(n);
-        
-    for(std::size_t i=n; i>=2; --i) if(primes[i] && pal_test(i)) return i;
-        
+    auto primes = prime_sieve(range);
+    
+    for(std::size_t i=range; i>=2; --i) if(primes[i] && pal_test(i)) return i;
+    
     return 2;
 }
 
 
-std::size_t inpal::max_factor(std::size_t f)
+template <class T> T inpal::prime<T>::max_factor(T num)
 {
-    return factorizer(f).back();
+    return factorizer(num).back();
 }
 
 
-std::size_t inpal::count_factors(std::size_t f)
+template <class T> T inpal::prime<T>::count_factors(T num)
 {
-    return factorizer(f).size();
+    return factorizer(num).size();
 }
 
 
-std::vector<bool> inpal::prime_sieve(std::size_t m)
+template <class T> std::vector<bool> inpal::prime<T>::prime_sieve(T range)
 {
-    std::vector<bool> p_test(m+1, false);
+    std::vector<bool> p_test(range+1, false);
     
     //defines square root of m
-    std::size_t root = ceil(sqrt(m));
+    T root = ceil(sqrt(range));
     
     //sieve axioms
     for(std::size_t x=1; x<=root; x++)
     {
         for(std::size_t y=1; y<=root; y++)
         {
-            std::size_t i= (4*x*x)+(y*y);
-            if (i<=m && (i%12==1 || i%12==5))
+            std::size_t  i = (4*x*x)+(y*y);
+            if (i<=range && (i%12==1 || i%12==5))
             {
                 p_test[i].flip();
             }
             
-            i=(3*x*x)+(y*y);
-            if(i<=m && i%12==7)
+            i = (3*x*x)+(y*y);
+            if(i<=range && i%12==7)
             {
                 p_test[i].flip();
             }
             
-            i=(3*x*x)-(y*y);
-            if(x>y && i<=m && i%12==11)
+            i = (3*x*x)-(y*y);
+            if(x>y && i<=range && i%12==11)
             {
                 p_test[i].flip();
             }
@@ -127,9 +127,9 @@ std::vector<bool> inpal::prime_sieve(std::size_t m)
     //marks all multiples of primes as non primes
     for(std::size_t r=5; r<=root; r++)
     {
-        if((p_test[r]))
+        if(p_test[r])
         {
-            for(std::size_t j=r*r; j<=m; j+=r*r)
+            for(std::size_t j=r*r; j<=range; j+=r*r)
             {
                 p_test[j]=false;
             }
@@ -140,30 +140,30 @@ std::vector<bool> inpal::prime_sieve(std::size_t m)
 }
 
 
-std::vector<std::size_t> inpal::factorizer(std::size_t f)
+template <class T> std::vector<T> inpal::prime<T>::factorizer(T num)
 {
-    std::vector<std::size_t> p_fac;
-    std::size_t p = 2;
+    std::vector<T> p_fac;
+    T p = 2;
     
     //trial division
-    while(p<=f)
+    while(p<=num)
     {
-        while(f%p==0)
+        while(num%p==0)
         {
             p_fac.push_back(p);
-            f=f/p;
+            num=num/p;
         }
-        p+= p==2 ? 1 : 2;
+        p += p==2 ? 1 : 2;
     }
     
     return p_fac;
 }
 
 
-bool inpal::pal_test(std::size_t n)
+template <class T> bool inpal::prime<T>::pal_test(T num)
 {
     //converts n to a string
-    std::string rev = std::to_string(n);
+    std::string rev = std::to_string(num);
     
     //checks if the reverse of rev is equal to rev
     if(std::equal(rev.begin(), rev.begin()+rev.size()/2, rev.rbegin()))
@@ -173,3 +173,9 @@ bool inpal::pal_test(std::size_t n)
     
     return false;
 }
+
+//explicit instantiation
+template class inpal::prime<unsigned long>;
+template class inpal::prime<unsigned long long>;
+template class inpal::prime<long>;
+template class inpal::prime<long long>;
