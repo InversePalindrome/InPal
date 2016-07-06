@@ -1,6 +1,6 @@
 # Prime-Numbers
 
-**A c++ library for dealing with Prime Numbers. Currently uses 10 different functions that are powered by the Sieve of Atkin:**
+**A C++ Library for dealing with Prime Numbers. Currently uses 10 different functions that are powered by the Sieve of Atkin:**
 
 - max_prime(n): Finds the highest prime number less or equal to the input given.
 
@@ -29,5 +29,5 @@
 - max_factor(f): Finds the highest prime factor of a given number.
 
 
-- count_factors(f): Counts the number of prime factors that composes a number(including f).
+- count_factors(f): Counts the number of prime factors that compos a number(including f).
  
