@@ -93,7 +93,7 @@ template <class T> std::vector<bool> inpal::prime<T>::prime_sieve(T range)
 {
     std::vector<bool> p_test(range+1, false);
     
-    //defines square root of m
+    //defines square root of range
     T root = ceil(sqrt(range));
     
     //sieve axioms
@@ -162,7 +162,7 @@ template <class T> std::vector<T> inpal::prime<T>::factorizer(T num)
 
 template <class T> bool inpal::prime<T>::pal_test(T num)
 {
-    //converts n to a string
+    //converts num to a string
     std::string rev = std::to_string(num);
     
     //checks if the reverse of rev is equal to rev
