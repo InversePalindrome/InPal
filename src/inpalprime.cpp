@@ -98,7 +98,6 @@ template <class T> std::vector<bool> inpal::prime<T>::prime_sieve(T range)
     
     //sieve axioms
     for(std::size_t x=1; x<=root; x++)
-    {
         for(std::size_t y=1; y<=root; y++)
         {
             std::size_t  i = (4*x*x)+(y*y);
@@ -119,7 +118,7 @@ template <class T> std::vector<bool> inpal::prime<T>::prime_sieve(T range)
                 p_test[i].flip();
             }
         }
-    }
+
     
     //marks 2,3,5 and 7 as prime numbers
     p_test[2]=p_test[3]=p_test[5]=p_test[7]=true;
