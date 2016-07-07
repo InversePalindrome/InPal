@@ -1,6 +1,6 @@
 //
 //  inpalprime.hpp
-//  InPal TESTS
+//  InPal
 //
 //  Created by bryan triana on 6/21/16.
 //  Copyright © 2016 Inverse Palindrome. All rights reserved.
