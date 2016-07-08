@@ -2,7 +2,7 @@
 //  inpalprime.hpp
 //  InPal
 //
-//  Created by bryan triana on 6/21/16.
+//  Created by Bryan Triana on 6/21/16.
 //  Copyright © 2016 Inverse Palindrome. All rights reserved.
 //
 
@@ -12,6 +12,7 @@
 
 #include <vector>
 #include <string>
+#include <type_traits>
 
 
 namespace inpal
@@ -34,6 +35,12 @@ namespace inpal
      static std::vector<T> factorizer(T num);
      static bool pal_test(T num);
     };
+    
+    template <> class inpal::prime<bool> : std::false_type {};
+    template <> class inpal::prime<short> : std::false_type {};
+    template <> class inpal::prime<unsigned short> : std::false_type {};
+    template <> class inpal::prime<int> : std::false_type {};
+    template <> class inpal::prime<unsigned> : std::false_type {};
 }
 
 
