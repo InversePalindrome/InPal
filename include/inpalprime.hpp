@@ -12,37 +12,29 @@
 
 #include <vector>
 #include <string>
-#include <type_traits>
 
 
 namespace inpal
 {
-    template <class T> class prime
+    class prime
     {
     public:
-     static T max_prime(T range);
-     static T count_primes(T range);
-     static double prime_density(double range);
-     static bool prime_test(T num);
-     static bool twin_test(T num);
-     static bool cousin_test(T num);
-     static bool sexy_test(T num);
-     static T max_palprime(T range);
-     static T max_factor(T num);
-     static T count_factors(T num);
+        static std::size_t max_prime(std::size_t range);
+        static std::size_t prime_count(std::size_t range);
+        static double prime_density(double range);
+        static bool prime_test(std::size_t num);
+        static bool twin_test(std::size_t num);
+        static bool cousin_test(std::size_t num);
+        static bool sexy_test(std::size_t num);
+        static std::size_t max_palprime(std::size_t range);
+        static std::size_t max_factor(std::size_t num);
+        static std::size_t count_factors(std::size_t num);
     private:
-     static std::vector<bool> prime_sieve(T range);
-     static std::vector<T> factorizer(T num);
-     static bool pal_test(T num);
+        static std::vector<bool> prime_sieve(std::size_t range);
+        static std::vector<std::size_t> factorizer(std::size_t num);
+        static bool pal_test(std::size_t num);
     };
-    
-    template <> class inpal::prime<bool> : std::false_type {};
-    template <> class inpal::prime<short> : std::false_type {};
-    template <> class inpal::prime<unsigned short> : std::false_type {};
-    template <> class inpal::prime<int> : std::false_type {};
-    template <> class inpal::prime<unsigned> : std::false_type {};
 }
 
 
 #endif /* inpalprime_hpp */
-
