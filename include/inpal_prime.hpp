@@ -1,10 +1,11 @@
 //
 //  inpal_prime.hpp
-//  inpalprime
+//  InversePalindrome
 //
-//  Created by bryan triana on 7/13/16.
+//  Created by Bryan Triana on 7/13/16.
 //  Copyright © 2016 Inverse Palindrome. All rights reserved.
 //
+
 
 #ifndef inpal_prime_hpp
 #define inpal_prime_hpp
