@@ -93,7 +93,7 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
 {
     std::vector<bool> p_test(range+1, false);
     
-    //defines square root of range
+    //defines square root of range for future usage
     std::size_t root = ceil(sqrt(range));
     
     //sieve axioms
@@ -119,7 +119,7 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
             }
         }
     
-    //marks 2,3,5 and 7 as prime numbers
+    //marks 2,3,5 and 7 as prime numbers to deal with input smaller than 7
     p_test[2]=p_test[3]=p_test[5]=p_test[7]=true;
     
     //marks all multiples of primes as non primes
@@ -148,7 +148,7 @@ std::vector<std::size_t> inpal::prime::factorizer(std::size_t num)
     {
         while(num%p==0)
         {
-            p_fac.push_back(num);
+            p_fac.push_back(p);
             num=num/p;
         }
         p += p==2 ? 1 : 2;
@@ -160,10 +160,9 @@ std::vector<std::size_t> inpal::prime::factorizer(std::size_t num)
 
 bool inpal::prime::pal_test(std::size_t num)
 {
-    //converts num to a string
     std::string rev = std::to_string(num);
     
-    //checks if the reverse of rev is equal to rev
+    //checks if half the reverse of rev is equal to the other half of rev
     if(std::equal(rev.begin(), rev.begin()+rev.size()/2, rev.rbegin()))
     {
         return true;
