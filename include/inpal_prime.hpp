@@ -20,8 +20,8 @@ namespace inpal
     {
     public:
         //general purpose functions
+        static std::vector<std::size_t> prime_list(std::size_t range);
         static std::vector<std::size_t> factor_list(std::size_t num);
-        static std::vector<std::size_t> prime_list(std::size_t num);
         //special purpose functions
         static std::size_t max_prime(std::size_t range);
         static std::size_t prime_count(std::size_t range);
