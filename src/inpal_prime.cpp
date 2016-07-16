@@ -45,6 +45,14 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 }
 
 
+std::size_t inpal::prime::prime_count(std::size_t range)
+{
+    auto primes = prime_sieve(range);
+    
+    return std::count(primes.begin(), primes.end(), true);
+}
+
+
 std::size_t inpal::prime::max_prime(std::size_t num)
 {
     auto primes = prime_sieve(num);
