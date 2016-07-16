@@ -14,12 +14,12 @@
 #include <algorithm>
 
 
-std::vector<std::size_t> inpal::prime::prime_list(std::size_t num)
+std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
 {
-    auto primes = prime_sieve(num);
+    auto primes = prime_sieve(range);
     std::vector<std::size_t> p_list;
     
-    for(std::size_t i=2; i<=num; i++) if(primes[i]) p_list.push_back(i);
+    for(std::size_t i=2; i<=range; i++) if(primes[i]) p_list.push_back(i);
     
     return p_list;
 }
@@ -28,17 +28,17 @@ std::vector<std::size_t> inpal::prime::prime_list(std::size_t num)
 std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 {
     std::vector<std::size_t> p_fac;
-    std::size_t p = 2;
+    std::size_t prime_factor = 2;
     
     //trial division
-    while(p<=num)
+    while(prime_factor<=num)
     {
-        while(num%p==0)
+        while(num%prime_factor==0)
         {
-            p_fac.push_back(p);
-            num=num/p;
+            p_fac.push_back(prime_factor);
+            num=num/prime_factor;
         }
-        p += p==2 ? 1 : 2;
+        prime_factor += prime_factor==2 ? 1 : 2;
     }
     
     return p_fac;
