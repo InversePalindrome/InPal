@@ -54,14 +54,6 @@ std::size_t inpal::prime::max_prime(std::size_t num)
 }
 
 
-std::size_t inpal::prime::factor_count(std::size_t num)
-{
-    auto primes = prime_sieve(num);
-    
-    return std::count(primes.begin(), primes.end(), true);
-}
-
-
 double inpal::prime::prime_density(double range)
 {
     return prime_count(range)/range;
