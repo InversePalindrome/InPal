@@ -14,6 +14,37 @@
 #include <algorithm>
 
 
+std::vector<std::size_t> inpal::prime::prime_list(std::size_t num)
+{
+    auto primes = prime_sieve(num);
+    std::vector<std::size_t> p_list;
+    
+    for(std::size_t i=2; i<=num; i++) if(primes[i]) p_list.push_back(i);
+    
+    return p_list;
+}
+
+
+std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
+{
+    std::vector<std::size_t> p_fac;
+    std::size_t p = 2;
+    
+    //trial division
+    while(p<=num)
+    {
+        while(num%p==0)
+        {
+            p_fac.push_back(p);
+            num=num/p;
+        }
+        p += p==2 ? 1 : 2;
+    }
+    
+    return p_fac;
+}
+
+
 std::size_t inpal::prime::max_prime(std::size_t num)
 {
     auto primes = prime_sieve(num);
@@ -23,7 +54,7 @@ std::size_t inpal::prime::max_prime(std::size_t num)
 }
 
 
-std::size_t inpal::prime::prime_count(std::size_t num)
+std::size_t inpal::prime::factor_count(std::size_t num)
 {
     auto primes = prime_sieve(num);
     
@@ -79,13 +110,13 @@ std::size_t inpal::prime::max_palprime(std::size_t num)
 
 std::size_t inpal::prime::max_factor(std::size_t num)
 {
-    return factorizer(num).back();
+    return factor_list(num).back();
 }
 
 
-std::size_t inpal::prime::count_factors(std::size_t num)
+std::size_t inpal::prime::factor_count(std::size_t num)
 {
-    return factorizer(num).size();
+    return factor_list(num).size();
 }
 
 
@@ -135,26 +166,6 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
     }
     
     return p_test;
-}
-
-
-std::vector<std::size_t> inpal::prime::factorizer(std::size_t num)
-{
-    std::vector<std::size_t> p_fac;
-    std::size_t p = 2;
-    
-    //trial division
-    while(p<=num)
-    {
-        while(num%p==0)
-        {
-            p_fac.push_back(p);
-            num=num/p;
-        }
-        p += p==2 ? 1 : 2;
-    }
-    
-    return p_fac;
 }
 
 
