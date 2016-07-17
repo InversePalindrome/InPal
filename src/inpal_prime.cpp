@@ -16,7 +16,7 @@
 
 std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
 {
-    auto primes = prime_sieve(range);
+    const auto primes = prime_sieve(range);
     std::vector<std::size_t> p_list;
     
     for(std::size_t i=2; i<=range; i++) if(primes[i]) p_list.push_back(i);
@@ -47,7 +47,7 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 
 std::size_t inpal::prime::max_prime(std::size_t num)
 {
-    auto primes = prime_sieve(num);
+    const auto primes = prime_sieve(num);
     auto it = std::find(primes.rbegin(), primes.rend(), true);
     
     return primes.size()-std::distance(primes.rbegin(), it)-1;
@@ -56,7 +56,7 @@ std::size_t inpal::prime::max_prime(std::size_t num)
 
 std::size_t inpal::prime::prime_count(std::size_t range)
 {
-    auto primes = prime_sieve(range);
+    const auto primes = prime_sieve(range);
     
     return std::count(primes.begin(), primes.end(), true);
 }
@@ -76,7 +76,7 @@ bool inpal::prime::prime_test(std::size_t num)
 
 bool inpal::prime::twin_test(std::size_t num)
 {
-    auto primes = prime_sieve(num+2);
+    const auto primes = prime_sieve(num+2);
     
     return num!=2 && primes[primes.size()-3] && (primes[primes.size()-1] || primes[primes.size()-5]);
 }
@@ -84,7 +84,7 @@ bool inpal::prime::twin_test(std::size_t num)
 
 bool inpal::prime::cousin_test(std::size_t num)
 {
-    auto primes = prime_sieve(num+4);
+    const auto primes = prime_sieve(num+4);
     
     return  num!=2 && primes[primes.size()-5] && (primes[primes.size()-1] || primes[primes.size()-9]);
 }
@@ -92,7 +92,7 @@ bool inpal::prime::cousin_test(std::size_t num)
 
 bool inpal::prime::sexy_test(std::size_t num)
 {
-    auto primes = prime_sieve(num+6);
+    const auto primes = prime_sieve(num+6);
     
     return (num!=2 && num!=3) && primes[primes.size()-7] && (primes[primes.size()-1] || primes[primes.size()-13]);
 }
@@ -100,7 +100,7 @@ bool inpal::prime::sexy_test(std::size_t num)
 
 std::size_t inpal::prime::max_palprime(std::size_t num)
 {
-    auto primes = prime_sieve(num);
+    const auto primes = prime_sieve(num);
     
     for(std::size_t i=num; i>=2; --i) if(primes[i] && pal_test(i)) return i;
     
@@ -125,7 +125,7 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
     std::vector<bool> p_test(range+1, false);
     
     //defines square root of range for future usage
-    std::size_t root = ceil(sqrt(range));
+    const std::size_t root = ceil(sqrt(range));
     
     //sieve axioms
     for(std::size_t x=1; x<=root; x++)
