@@ -9,7 +9,6 @@
 
 #ifndef inpal_prime_hpp
 #define inpal_prime_hpp
-
 #include <vector>
 #include <string>
 
