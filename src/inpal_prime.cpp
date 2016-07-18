@@ -45,6 +45,23 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 }
 
 
+std::size_t inpal::prime::prime_locate(std::size_t pos)
+{
+    //index starts at 1 instead of 0, eg 1st prime is 2
+    pos = pos-1;
+    
+    //return values for input less or equal to 10
+    const auto small_primes = prime_list(29);
+    if(pos<10) return small_primes[pos];
+    
+    //denotes the limit of the sieve
+    std::size_t limit = pos*log(pos)+pos*log(log(pos));
+    const auto primes = prime_list(limit);
+  
+    return primes[pos];
+}
+
+
 std::size_t inpal::prime::max_prime(std::size_t num)
 {
     const auto primes = prime_sieve(num);
