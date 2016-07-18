@@ -23,6 +23,7 @@ namespace inpal
         static std::vector<std::size_t> prime_list(std::size_t range);
         static std::vector<std::size_t> factor_list(std::size_t num);
         //special purpose functions
+        static std::size_t prime_locate(std::size_t pos);
         static std::size_t max_prime(std::size_t range);
         static std::size_t prime_count(std::size_t range);
         static double prime_density(double range);
