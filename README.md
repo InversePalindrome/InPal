@@ -18,7 +18,7 @@
 **Special Purpose**
 
 
--**prime_locate:** Finds the nth prime number given its position in the number line(ex: 3rd prime-> 5)
+- **prime_locate:** Finds the nth prime number given its position in the number line(ex: 3rd prime-> 5)
 
 
 - **max_prime:** Finds the highest prime number less or equal to the input given.
