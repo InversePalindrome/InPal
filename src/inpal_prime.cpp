@@ -87,31 +87,30 @@ double inpal::prime::prime_density(double range)
 
 bool inpal::prime::prime_test(std::size_t num)
 {
-    return num == max_prime(num);
+   if(num==2) return true;
+   if(num%2==0 || num==1) return false;
+
+   for(std::size_t divisor=3; divisor<=sqrt(num); divisor+=2) if(num%divisor==0) return false;
+    
+   return true;
 }
 
 
 bool inpal::prime::twin_test(std::size_t num)
 {
-    const auto primes = prime_sieve(num+2);
-    
-    return num!=2 && primes[primes.size()-3] && (primes[primes.size()-1] || primes[primes.size()-5]);
+   return prime_test(num) && (prime_test(num-2) || prime_test(num+2));
 }
 
 
 bool inpal::prime::cousin_test(std::size_t num)
 {
-    const auto primes = prime_sieve(num+4);
-    
-    return  num!=2 && primes[primes.size()-5] && (primes[primes.size()-1] || primes[primes.size()-9]);
+   return  prime_test(num) && (prime_test(num-4) || prime_test(num+4));
 }
 
 
 bool inpal::prime::sexy_test(std::size_t num)
 {
-    const auto primes = prime_sieve(num+6);
-    
-    return (num!=2 && num!=3) && primes[primes.size()-7] && (primes[primes.size()-1] || primes[primes.size()-13]);
+   return num!=3 && prime_test(num) && (prime_test(num-6) || prime_test(num+6));
 }
 
 
