@@ -36,6 +36,8 @@ namespace inpal
     private:
         //utility algorithms
         static std::vector<bool> prime_sieve(std::size_t range);
+        static std::size_t modulo(std::size_t a, std::size_t b, std::size_t c);
+        static std::size_t mulmod(std::size_t a, std::size_t b, std::size_t c);
         static bool pal_test(std::size_t num);
     };
 }
