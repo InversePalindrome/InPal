@@ -6,6 +6,7 @@
 //  Copyright © 2016 Inverse Palindrome. All rights reserved.
 //
 
+
 #ifndef inpal_algorithm_hpp
 #define inpal_algorithm_hpp
 #include <cstdlib>
