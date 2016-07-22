@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <cstdlib>
 
 
 std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
