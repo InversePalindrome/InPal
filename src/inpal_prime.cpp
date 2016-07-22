@@ -200,3 +200,5 @@ std::size_t inpal::prime::factor_count(std::size_t num)
 {
     return factor_list(num).size();
 }
+
+
