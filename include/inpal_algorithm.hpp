@@ -9,7 +9,9 @@
 
 #ifndef inpal_algorithm_hpp
 #define inpal_algorithm_hpp
+
 #include <cstdlib>
+#include <string>
 
 
 namespace inpal
