@@ -87,12 +87,27 @@ double inpal::prime::prime_density(double range)
 
 bool inpal::prime::prime_test(std::size_t num)
 {
-   if(num==2) return true;
-   if(num%2==0 || num==1) return false;
-
-   for(std::size_t divisor=3; divisor<=sqrt(num); divisor+=2) if(num%divisor==0) return false;
+    if(num!=2 && num%2==0) return false;
     
-   return true;
+    const std::size_t iteration = 20;
+    std::size_t s = num-1;
+    while(s%2==0) s/=2;
+    
+    for(std::size_t i=0; i<iteration; i++)
+    {
+        std::size_t a = rand()%(num-1)+1;
+        std::size_t b = s;
+        std::size_t mod = modulo(a,b,num);
+        
+        while(b!=num-1 && mod!=1 && mod!=num-1)
+        {
+            mod=mulmod(mod,mod,num);
+            b*=2;
+        }
+        if(mod!=num-1 && b%2==0) return false;
+    }
+    
+    return true;
 }
 
 
@@ -182,6 +197,37 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
     }
     
     return p_test;
+}
+
+
+std::size_t inpal::prime::modulo(std::size_t a, std::size_t b, std::size_t c)
+{
+    std::size_t x = 1;
+    
+    while(b>0)
+    {
+        if(b%2==1) x=(x*a%c);
+        a=(a*a)%c;
+        b/=2;
+    }
+    
+    return x%c;
+}
+
+
+std::size_t inpal::prime::mulmod(std::size_t a, std::size_t b, std::size_t c)
+{
+    std::size_t x = 0;
+    std::size_t y = a%c;
+    
+    while(b>0)
+    {
+        if(b%2==1) x=(x+y)%c;
+        y=(y*2)%c;
+        b/=2;
+    }
+    
+    return x%c;
 }
 
 
