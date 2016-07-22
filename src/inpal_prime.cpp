@@ -9,11 +9,6 @@
 
 #include "inpal_prime.hpp"
 #include "inpal_algorithm.hpp"
-#include <cmath>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <cstdlib>
 
 
 std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
