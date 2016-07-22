@@ -23,3 +23,5 @@ namespace inpal
 
 
 #endif /* inpal_algorithm_hpp */
+
+
