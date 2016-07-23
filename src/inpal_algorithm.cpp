@@ -108,7 +108,6 @@ std::vector<std::size_t> inpal::algorithm::trial_division(std::size_t num)
     std::vector<std::size_t> p_fac;
     std::size_t prime_factor = 2;
     
-    //trial division
     while(prime_factor<=num)
     {
         if(num%prime_factor==0)
