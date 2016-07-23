@@ -73,21 +73,51 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
 
 std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 {
-    std::vector<std::size_t> p_fac;
-    std::size_t prime_factor = 2;
-    
-    //trial division
-    while(prime_factor<=num)
+    if(num<100000)
     {
-        while(num%prime_factor==0)
-        {
-            p_fac.push_back(prime_factor);
-            num=num/prime_factor;
-        }
-        prime_factor += prime_factor==2 ? 1 : 2;
+        return algorithm::trial_division(num);
     }
     
-    return p_fac;
+    std::vector<std::size_t> factors;
+    std::vector<std::size_t> primes;
+    
+    std::size_t factor = algorithm::pollard_rho(num);
+    factors.push_back(num/factor);
+    factors.push_back(factor);
+    
+    do
+    {
+        std::size_t m = factors.back();
+        factors.pop_back();
+        
+        if(m==1) continue;
+        if(prime_test(m))
+        {
+            primes.push_back(m);
+            
+            //decomposes the factors into primes
+            for(std::size_t i=0; i<factors.size(); i++)
+            {
+                std::size_t k = factors[i];
+                if(k%m==0)
+                {
+                    do k/=m;
+                    while(k%m==0);
+                    
+                    factors[i]=k;
+                }
+            }
+        }
+        else
+        {
+            factor=algorithm::pollard_rho(m);
+            factors.push_back(m/factor);
+            factors.push_back(factor);
+        }
+    }
+    while(!factors.empty());
+    
+    return primes;
 }
 
 
