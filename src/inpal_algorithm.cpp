@@ -127,10 +127,7 @@ bool inpal::algorithm::pal_test(std::size_t num)
     std::string rev = std::to_string(num);
     
     //checks if half the reverse of rev is equal to the other half of rev
-    if(std::equal(rev.begin(), rev.begin()+rev.size()/2, rev.rbegin()))
-    {
-        return true;
-    }
+    if(std::equal(rev.begin(), rev.begin()+rev.size()/2, rev.rbegin())) return true;
     
     return false;
 }
