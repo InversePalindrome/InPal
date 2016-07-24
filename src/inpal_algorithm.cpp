@@ -57,22 +57,22 @@ std::size_t inpal::algorithm::mulmod(std::size_t a, std::size_t b, std::size_t c
 std::size_t inpal::algorithm::pollard_rho(std::size_t num)
 {
     const std::size_t m = 1000;
-    std::size_t a, x, y, ys, r, q, d;
+    std::size_t a, x, ys;
     
     do a = rand()%num;
     while(a==0||a==num-2);
     
-    y = rand()%num;
-    d = 1;
-    q = 1;
-    r = 1;
+    std::size_t y = rand()%num;
+    std::size_t d = 1;
+    std::size_t q = 1;
+    std::size_t r = 1;
     
     do
     {
         x=y;
         for(std::size_t i=0; i<=r; i++) y=mulmod(y,a,num);
-        std::size_t j = 0;
         
+        std::size_t j = 0;
         do
         {
             ys = y;
