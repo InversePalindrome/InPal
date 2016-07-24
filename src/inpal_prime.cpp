@@ -73,11 +73,6 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
 
 std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 {
-    if(num<100000)
-    {
-        return algorithm::trial_division(num);
-    }
-    
     std::vector<std::size_t> factors;
     std::vector<std::size_t> primes;
     
@@ -116,6 +111,8 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
         }
     }
     while(!factors.empty());
+    
+    std::sort(primes.begin(), primes.end());
     
     return primes;
 }
