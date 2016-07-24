@@ -137,12 +137,8 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
 
 std::size_t inpal::prime::max_prime(std::size_t range)
 {
-    while(range)
-    {
-        if(prime_test(range)) return range;
-        range = range%2==0 ? range-1 : range-2;
-    }
-    
+    for(std::size_t i=range; i>0; i--) if(prime_test(i)) return i;
+
     return 2;
 }
 
@@ -205,11 +201,9 @@ bool inpal::prime::sexy_test(std::size_t num)
 }
 
 
-std::size_t inpal::prime::max_palprime(std::size_t num)
+std::size_t inpal::prime::max_palprime(std::size_t range)
 {
-    const auto primes = prime_sieve(num);
-    
-    for(std::size_t i=num; i>=2; --i) if(primes[i] && algorithm::pal_test(i)) return i;
+    for(std::size_t i=range; i>2; --i) if(prime_test(i) && algorithm::pal_test(i)) return i;
     
     return 2;
 }
