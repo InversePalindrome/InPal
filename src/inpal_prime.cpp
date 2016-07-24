@@ -110,7 +110,7 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
             factors.push_back(factor);
         }
     }
-    while(!factors.empty());
+    while(factors.size());
     
     std::sort(primes.begin(), primes.end());
     
@@ -135,12 +135,15 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
 }
 
 
-std::size_t inpal::prime::max_prime(std::size_t num)
+std::size_t inpal::prime::max_prime(std::size_t range)
 {
-    const auto primes = prime_sieve(num);
-    auto it = std::find(primes.rbegin(), primes.rend(), true);
+    while(range)
+    {
+        if(prime_test(range)) return range;
+        range = range%2==0 ? range-1 : range-2;
+    }
     
-    return primes.size()-std::distance(primes.rbegin(), it)-1;
+    return 2;
 }
 
 
