@@ -23,6 +23,12 @@ std::size_t inpal::algorithm::gcd(std::size_t a, std::size_t b)
 }
 
 
+std::size_t inpal::algorithm::lcm(std::size_t a, std::size_t b)
+{
+    return (a*b)/gcd(a, b);
+}
+
+
 std::size_t inpal::algorithm::modulo(std::size_t a, std::size_t b, std::size_t c)
 {
     std::size_t x = 1;
