@@ -150,11 +150,12 @@ bool inpal::prime::prime_test(std::size_t num)
 {
     if(num!=2 && num%2==0) return false;
     
-    const std::size_t iteration = 20;
+    //iterations will occur 20 times to ensure that the margin of error is less than 4^-20
+    const std::size_t cycle = 20;
     std::size_t s = num-1;
     while(s%2==0) s/=2;
     
-    for(std::size_t i=0; i<iteration; i++)
+    for(std::size_t i=0; i<cycle; i++)
     {
         std::size_t a = rand()%(num-1)+1;
         std::size_t b = s;
