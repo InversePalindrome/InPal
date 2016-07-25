@@ -34,22 +34,13 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
         for(std::size_t y=1; y<=root; y++)
         {
             std::size_t i = (4*x*x)+(y*y);
-            if (i<=range && (i%12==1 || i%12==5))
-            {
-                p_test[i].flip();
-            }
+            if (i<=range && (i%12==1 || i%12==5)) p_test[i].flip();
             
             i = (3*x*x)+(y*y);
-            if(i<=range && i%12==7)
-            {
-                p_test[i].flip();
-            }
+            if(i<=range && i%12==7) p_test[i].flip();
             
             i = (3*x*x)-(y*y);
-            if(x>y && i<=range && i%12==11)
-            {
-                p_test[i].flip();
-            }
+            if(x>y && i<=range && i%12==11) p_test[i].flip();
         }
     
     //marks 2,3,5 and 7 as prime numbers to deal with input smaller than 7
@@ -58,12 +49,9 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
     //marks all multiples of primes as non primes
     for(std::size_t r=5; r<=root; r++)
     {
-        if((p_test[r]))
+       if(p_test[r])
         {
-            for(std::size_t j=r*r; j<=range; j+=r*r)
-            {
-                p_test[j]=false;
-            }
+            for(std::size_t j=r*r; j<=range; j+=r*r) p_test[j]=false;
         }
     }
     
@@ -112,6 +100,7 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
     }
     while(factors.size());
     
+    //prime factors found by pollard rho arent always ordered
     std::sort(primes.begin(), primes.end());
     
     return primes;
