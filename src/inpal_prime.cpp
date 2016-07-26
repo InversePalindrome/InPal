@@ -34,7 +34,7 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
         for(std::size_t y=1; y<=root; y++)
         {
             std::size_t i = (4*x*x)+(y*y);
-            if (i<=range && (i%12==1 || i%12==5)) p_test[i].flip();
+            if(i<=range && (i%12==1 || i%12==5)) p_test[i].flip();
             
             i = (3*x*x)+(y*y);
             if(i<=range && i%12==7) p_test[i].flip();
