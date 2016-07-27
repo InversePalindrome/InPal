@@ -193,7 +193,7 @@ bool inpal::prime::sexy_test(std::size_t num)
 
 std::size_t inpal::prime::max_palprime(std::size_t range)
 {
-    for(std::size_t i=range; i>2; --i) if(prime_test(i) && algorithm::pal_test(i)) return i;
+    for(std::size_t i=range; i>2; --i) if(algorithm::pal_test(i) && prime_test(i)) return i;
     
     return 2;
 }
