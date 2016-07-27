@@ -13,10 +13,14 @@
 
 std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
 {
-    const auto primes = prime_sieve(range);
+   const auto primes = prime_sieve(range);
     std::vector<std::size_t> p_list;
     
-    for(std::size_t i=2; i<=range; i++) if(primes[i]) p_list.push_back(i);
+    //insert 2 and 3 to start at 5 in upcoming loop
+    p_list.push_back(2);
+    p_list.push_back(3);
+    
+    for(std::size_t i=5; i<=range; i+=2) if(primes[i]) p_list.push_back(i);
     
     return p_list;
 }
@@ -44,7 +48,7 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
         }
     
     //marks 2,3,5 and 7 as prime numbers to deal with input smaller than 7
-    p_test[2]=p_test[3]=p_test[5]=p_test[7]=true;
+    p_test[2]=p_test[3]=p_test[5]=true;
     
     //marks all multiples of primes as non primes
     for(std::size_t r=5; r<=root; r++)
