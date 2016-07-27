@@ -109,25 +109,6 @@ std::size_t inpal::algorithm::pollard_rho(std::size_t num)
 }
 
 
-std::vector<std::size_t> inpal::algorithm::trial_division(std::size_t num)
-{
-    std::vector<std::size_t> p_fac;
-    std::size_t prime_factor = 2;
-    
-    while(prime_factor<=num)
-    {
-        if(num%prime_factor==0)
-        {
-            p_fac.push_back(prime_factor);
-            num=num/prime_factor;
-        }
-        prime_factor += prime_factor==2 ? 1 : 2;
-    }
-    
-    return p_fac;
-}
-
-
 bool inpal::algorithm::pal_test(std::size_t num)
 {
     std::string rev = std::to_string(num);
