@@ -43,7 +43,7 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
             if(x>y && i<=range && i%12==11) p_test[i].flip();
         }
     
-    //marks 2,3,5 and 7 as prime numbers to deal with input smaller than 7
+    //marks 2, 3 and 5 as prime numbers to ignore these numbers in the next process
     p_test[2]=p_test[3]=p_test[5]=true;
     
     //marks all multiples of primes as non primes
