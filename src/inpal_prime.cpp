@@ -15,8 +15,13 @@ std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
 {
     const auto primes = prime_sieve(range);
     std::vector<std::size_t> p_list;
+    if(range<2) return p_list;
+   
+    p_list.push_back(2);
+    if(range==2) return p_list;
     
-    for(std::size_t i=2; i<=range; i++) if(primes[i]) p_list.push_back(i);
+    p_list.push_back(3);
+    for(std::size_t i=5; i<=range; i+=2) if(primes[i]) p_list.push_back(i);
     
     return p_list;
 }
@@ -43,13 +48,13 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
             if(x>y && i<=range && i%12==11) p_test[i].flip();
         }
     
-    //marks 2, 3 and 5 as prime numbers to ignore these numbers in the next process
+    //marks 2,3,5 and 7 as prime numbers to deal with input smaller than 7
     p_test[2]=p_test[3]=p_test[5]=true;
     
     //marks all multiples of primes as non primes
     for(std::size_t r=5; r<=root; r++)
     {
-       if(p_test[r])
+        if(p_test[r])
         {
             for(std::size_t j=r*r; j<=range; j+=r*r) p_test[j]=false;
         }
@@ -63,6 +68,8 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 {
     std::vector<std::size_t> factors;
     std::vector<std::size_t> primes;
+    
+    if(num<2) return primes;
     
     std::size_t factor = algorithm::pollard_rho(num);
     factors.push_back(num/factor);
@@ -112,12 +119,12 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
     //index starts at 1 instead of 0, eg 1st prime is 2
     pos = pos-1;
     
-    //return values for input less or equal to 13
-    const auto small_primes = prime_list(43);
-    if(pos<14) return small_primes[pos];
+    //return values for input less or equal to 10
+    const auto small_primes = prime_list(29);
+    if(pos<10) return small_primes[pos];
     
     //denotes the limit of the sieve
-    const std::size_t limit = pos*log(pos)+pos*log(log(pos));
+    std::size_t limit = pos*log(pos)+pos*log(log(pos));
     const auto primes = prime_list(limit);
     
     return primes[pos];
@@ -126,8 +133,10 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
 
 std::size_t inpal::prime::max_prime(std::size_t range)
 {
+    if(range<2) throw std::invalid_argument("There are no prime numbers less than two 2");
+    
     for(std::size_t i=range; i>0; i--) if(prime_test(i)) return i;
-
+    
     return 2;
 }
 
@@ -148,7 +157,7 @@ double inpal::prime::prime_density(double range)
 
 bool inpal::prime::prime_test(std::size_t num)
 {
-    if(num!=2 && num%2==0) return false;
+    if(num<2 ||(num!=2 && num%2==0)) return false;
     
     //iterations will occur 20 times to ensure that the margin of error is less than 4^-20
     const std::size_t cycle = 20;
@@ -193,7 +202,9 @@ bool inpal::prime::sexy_test(std::size_t num)
 
 std::size_t inpal::prime::max_palprime(std::size_t range)
 {
-    for(std::size_t i=range; i>2; --i) if(algorithm::pal_test(i) && prime_test(i)) return i;
+    if(range<2) throw std::invalid_argument("There are no palindromic prime numbers less than two 2");
+    
+    for(std::size_t i=range; i>=2; --i) if(prime_test(i) && algorithm::pal_test(i)) return i;
     
     return 2;
 }
@@ -201,6 +212,8 @@ std::size_t inpal::prime::max_palprime(std::size_t range)
 
 std::size_t inpal::prime::max_factor(std::size_t num)
 {
+    if(num<2) throw std::invalid_argument("There are no prime factors less than two 2");
+    
     return factor_list(num).back();
 }
 
