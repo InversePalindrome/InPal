@@ -20,8 +20,7 @@ std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
     p_list.push_back(2);
     if(range==2) return p_list;
     
-    p_list.push_back(3);
-    for(std::size_t i=5; i<=range; i+=2) if(primes[i]) p_list.push_back(i);
+    for(std::size_t i=3; i<=range; i+=2) if(primes[i]) p_list.push_back(i);
     
     return p_list;
 }
