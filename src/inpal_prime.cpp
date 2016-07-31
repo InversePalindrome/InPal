@@ -112,9 +112,9 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
     //index starts at 1 instead of 0, eg 1st prime is 2
     pos = pos-1;
     
-    //return values for input less or equal to 10
-    const auto small_primes = prime_list(29);
-    if(pos<10) return small_primes[pos];
+    //return values for input less or equal to 13
+    const auto small_primes = prime_list(43);
+    if(pos<14) return small_primes[pos];
     
     //denotes the limit of the sieve
     const std::size_t limit = pos*log(pos)+pos*log(log(pos));
