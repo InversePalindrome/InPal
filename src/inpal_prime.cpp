@@ -30,12 +30,9 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
 {
     std::vector<bool> p_test(range+1, false);
     
-    //defines square root of range for future usage
-    const std::size_t root = ceil(sqrt(range));
-    
     //sieve axioms
-    for(std::size_t x=1; x<=root; x++)
-        for(std::size_t y=1; y<=root; y++)
+    for(std::size_t x=1; x<=std::sqrt(range); x++)
+        for(std::size_t y=1; y<=std::sqrt(range); y++)
         {
             std::size_t i = (4*x*x)+(y*y);
             if(i<=range && (i%12==1 || i%12==5)) p_test[i].flip();
@@ -51,7 +48,7 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
     p_test[2]=p_test[3]=p_test[5]=true;
     
     //marks all multiples of primes as non primes
-    for(std::size_t r=5; r<=root; r++)
+    for(std::size_t r=5; r<=std::sqrt(range); r++)
     {
         if(p_test[r])
         {
@@ -142,9 +139,21 @@ std::size_t inpal::prime::max_prime(std::size_t range)
 
 std::size_t inpal::prime::prime_count(std::size_t range)
 {
-    const auto primes = prime_sieve(range);
+    if(range<2) return 0;
+    if(range==2) return 1;
     
-    return std::count(primes.begin(), primes.end(), true);
+    std::vector<bool> p_count(range/2+1, true);
+    
+    //modified sieve of eratosthenes
+    for(std::size_t i=1; i<=std::sqrt(range/2+1); i++)
+    {
+       if(p_count[i])
+       {
+           for(std::size_t j=2*i*(i+1); j<range/2+1; j+=2*i+1) p_count[j]=false;
+       }
+    }
+    
+    return std::count(p_count.begin(), p_count.end(), true);
 }
 
 
