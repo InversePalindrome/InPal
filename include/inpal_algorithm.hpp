@@ -2,7 +2,7 @@
 //  inpal_algorithm.hpp
 //  Inverse Palindrome Library
 //
-//  Created by Bryan Triana on 7/22/16.
+//  Created by Bryan Triana 
 //  Copyright © 2016 Inverse Palindrome. All rights reserved.
 //
 
@@ -29,5 +29,3 @@ namespace inpal
 
 
 #endif /* inpal_algorithm_hpp */
-
-
