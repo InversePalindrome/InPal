@@ -16,9 +16,8 @@ std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
     const auto primes = prime_sieve(range);
     std::vector<std::size_t> p_list;
     if(range < 2) return p_list;
-   
+    
     p_list.push_back(2);
-    if(range == 2) return p_list;
     
     for(std::size_t i = 3; i <= range; i += 2) if(primes[i]) p_list.push_back(i);
     
@@ -120,7 +119,7 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
     if(pos < 14) return small_primes[pos];
     
     //denotes the limit of the sieve
-    const std::size_t limit = pos * log(pos) + pos * log(log(pos));
+    const std::size_t limit = ceil(pos * log(pos) + pos * log(log(pos)));
     const auto primes = prime_list(limit);
     
     return primes[pos];
