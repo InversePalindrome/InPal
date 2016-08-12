@@ -62,6 +62,8 @@ std::size_t inpal::algorithm::mulmod(std::size_t a, std::size_t b, std::size_t c
 
 std::size_t inpal::algorithm::pollard_rho(std::size_t num)
 {
+    if(num<2) return num;
+
     const std::size_t m = 1000;
     std::size_t a, x, ys;
     
