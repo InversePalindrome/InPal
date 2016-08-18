@@ -128,7 +128,7 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
 
 std::size_t inpal::prime::max_prime(std::size_t range)
 {
-    if(range < 2) throw std::invalid_argument("There are no prime numbers less than two 2");
+    if(range < 2) throw std::invalid_argument("There are no prime numbers less than 2");
     
     for(std::size_t i = range; i > 0; i--) if(prime_test(i)) return i;
     
@@ -209,7 +209,7 @@ bool inpal::prime::sexy_test(std::size_t num)
 
 std::size_t inpal::prime::max_palprime(std::size_t range)
 {
-    if(range < 2) throw std::invalid_argument("There are no palindromic prime numbers less than two 2");
+    if(range < 2) throw std::invalid_argument("There are no palindromic prime numbers less than 2");
     
     for(std::size_t i = range; i >= 2; --i) if(prime_test(i) && algorithm::pal_test(i)) return i;
     
@@ -219,7 +219,7 @@ std::size_t inpal::prime::max_palprime(std::size_t range)
 
 std::size_t inpal::prime::max_factor(std::size_t num)
 {
-    if(num < 2) throw std::invalid_argument("There are no prime factors less than two 2");
+    if(num < 2) throw std::invalid_argument("There are no prime factors less than 2");
     
     return factor_list(num).back();
 }
