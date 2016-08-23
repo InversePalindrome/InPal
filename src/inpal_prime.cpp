@@ -13,7 +13,7 @@
 
 std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
 {
-    const auto primes = prime_sieve(range);
+    const auto& primes = prime_sieve(range);
     std::vector<std::size_t> p_list;
     if(range < 2) return p_list;
     
@@ -115,12 +115,12 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
     pos = pos - 1;
     
     //return values for input less or equal to 13
-    const auto small_primes = prime_list(43);
+    const auto& small_primes = prime_list(43);
     if(pos < 14) return small_primes[pos];
     
     //denotes the limit of the sieve
     const std::size_t limit = ceil(pos * log(pos) + pos * log(log(pos)));
-    const auto primes = prime_list(limit);
+    const auto& primes = prime_list(limit);
     
     return primes[pos];
 }
