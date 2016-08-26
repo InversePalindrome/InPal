@@ -12,12 +12,12 @@
 
 std::size_t inpal::algorithm::gcd(std::size_t a, std::size_t b)
 {
-  while(b != 0)
-  {
-      std::size_t r = a % b;
-      a = b;
-      b = r;
-  }
+    while(b != 0)
+    {
+        std::size_t r = a % b;
+        a = b;
+        b = r;
+    }
     
     return a;
 }
@@ -62,8 +62,8 @@ std::size_t inpal::algorithm::mulmod(std::size_t a, std::size_t b, std::size_t c
 
 std::size_t inpal::algorithm::pollard_rho(std::size_t num)
 {
-    if(num<2) return num;
-
+    if(num < 2) return num;
+    
     const std::size_t m = 1000;
     std::size_t a, x, ys;
     
@@ -78,13 +78,13 @@ std::size_t inpal::algorithm::pollard_rho(std::size_t num)
     do
     {
         x = y;
-        for(std::size_t i = 0; i <= r; i++) y = mulmod(y, a, num);
+        for(std::size_t i = 0; i <= r; ++i) y = mulmod(y, a, num);
         
         std::size_t j = 0;
         do
         {
             ys = y;
-            for(std::size_t i = 0; i <= std::min(m, r-j); i++)
+            for(std::size_t i = 0; i <= std::min(m, r - j); ++i)
             {
                 y = mulmod(y, a, num);
                 q *= (std::max(x, y) - std::min(x, y)) % num;
@@ -103,7 +103,7 @@ std::size_t inpal::algorithm::pollard_rho(std::size_t num)
         {
             ys = mulmod(ys, a, num);
             d = gcd(std::max(x, ys) - std::min(x, ys), num);
-        } 
+        }
         while(d == 1);
     }
     
