@@ -18,7 +18,7 @@ std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
     if(range < 2) return p_list;
     
     p_list.push_back(2);
-    
+
     for(std::size_t i = 3; i <= range; i += 2) if(primes[i]) p_list.push_back(i);
     
     return p_list;
@@ -30,8 +30,8 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
     std::vector<bool> p_test(range + 1, false);
     
     //sieve axioms
-    for(std::size_t x = 1; x <= std::sqrt(range); x++)
-        for(std::size_t y = 1; y <= std::sqrt(range); y++)
+    for(std::size_t x = 1; x <= std::sqrt(range); ++x)
+        for(std::size_t y = 1; y <= std::sqrt(range); ++y)
         {
             std::size_t i = (4 * x * x) + (y * y);
             if(i <= range && (i % 12 == 1 || i % 12 == 5)) p_test[i].flip();
@@ -43,11 +43,11 @@ std::vector<bool> inpal::prime::prime_sieve(std::size_t range)
             if(x > y && i <= range && i % 12 == 11) p_test[i].flip();
         }
     
-    //marks 2, 3 and 5 as prime numbers 
+    //marks 2, 3 and 5 as prime numbers
     p_test[2] = p_test[3] = p_test[5] = true;
     
     //marks all multiples of primes as non primes
-    for(std::size_t r = 5; r <= std::sqrt(range); r++)
+    for(std::size_t r = 5; r <= std::sqrt(range); ++r)
     {
         if(p_test[r])
         {
@@ -81,15 +81,15 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
             primes.push_back(m);
             
             //decomposes the factors into primes
-            for(std::size_t i = 0; i < factors.size(); i++)
+            for(auto& iterator : factors)
             {
-                std::size_t k = factors[i];
+                std::size_t k = iterator;
                 if(k % m == 0)
                 {
                     do k /= m;
                     while(k % m == 0);
                     
-                    factors[i] = k;
+                    iterator = k;
                 }
             }
         }
@@ -118,7 +118,7 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
     const auto& small_primes = prime_list(43);
     if(pos < 14) return small_primes[pos];
     
-    //denotes the limit of the sieve
+    //limits the size of the sieve
     const std::size_t limit = ceil(pos * log(pos) + pos * log(log(pos)));
     const auto& primes = prime_list(limit);
     
@@ -130,7 +130,7 @@ std::size_t inpal::prime::max_prime(std::size_t range)
 {
     if(range < 2) throw std::invalid_argument("There are no prime numbers less than 2");
     
-    for(std::size_t i = range; i > 0; i--) if(prime_test(i)) return i;
+    for(std::size_t i = range; i > 0; --i) if(prime_test(i)) return i;
     
     return 2;
 }
@@ -144,12 +144,12 @@ std::size_t inpal::prime::prime_count(std::size_t range)
     std::vector<bool> p_count(range / 2 + 1, true);
     
     //modified sieve of eratosthenes
-    for(std::size_t i = 1; i <= std::sqrt(range / 2 + 1); i++)
+    for(std::size_t i = 1; i <= std::sqrt(range / 2 + 1); ++i)
     {
-       if(p_count[i])
-       {
-           for(std::size_t j = 2 * i * (i + 1); j < range / 2 + 1; j += 2 * i + 1) p_count[j] = false;
-       }
+        if(p_count[i])
+        {
+            for(std::size_t j = 2 * i * (i + 1); j < range / 2 + 1; j += 2 * i + 1) p_count[j] = false;
+        }
     }
     
     return std::count(p_count.begin(), p_count.end(), true);
@@ -171,7 +171,7 @@ bool inpal::prime::prime_test(std::size_t num)
     std::size_t s = num - 1;
     while(s % 2 == 0) s /= 2;
     
-    for(std::size_t i = 0; i < cycle; i++)
+    for(std::size_t i = 0; i < cycle; ++i)
     {
         std::size_t a = rand() % (num - 1) + 1;
         std::size_t b = s;
@@ -183,7 +183,7 @@ bool inpal::prime::prime_test(std::size_t num)
             b *= 2;
         }
         if(mod != num - 1 && b % 2 == 0) return false;
-    } 
+    }
     
     return true;
 }
