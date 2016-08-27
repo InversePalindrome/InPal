@@ -25,38 +25,44 @@ std::size_t inpal::algorithm::gcd(std::size_t a, std::size_t b)
 
 std::size_t inpal::algorithm::lcm(std::size_t a, std::size_t b)
 {
+    if(a == 0 || b == 0) throw std::invalid_argument("Least Common Multiple of 0 is not defined");
+    
     return (a * b) / gcd(a, b);
 }
 
 
-std::size_t inpal::algorithm::modulo(std::size_t a, std::size_t b, std::size_t c)
+std::size_t inpal::algorithm::modulo(std::size_t a, std::size_t b, std::size_t m)
 {
+    if(m == 0) throw std::invalid_argument("Third parameter 'm' cannot be equal to 0, division by 0 is invalid");
+    
     std::size_t x = 1;
     
     while(b > 0)
     {
-        if(b % 2 == 1) x = (x * a % c);
-        a = (a * a) % c;
+        if(b % 2 == 1) x = (x * a % m);
+        a = (a * a) % m;
         b /= 2 ;
     }
     
-    return x % c;
+    return x % m;
 }
 
 
-std::size_t inpal::algorithm::mulmod(std::size_t a, std::size_t b, std::size_t c)
+std::size_t inpal::algorithm::mulmod(std::size_t a, std::size_t b, std::size_t m)
 {
+    if(m == 0) throw std::invalid_argument("Third parameter 'm' cannot be equal to 0, division by 0 is invalid");
+    
     std::size_t x = 0;
-    std::size_t y = a % c;
+    std::size_t y = a % m;
     
     while(b > 0)
     {
-        if(b % 2 == 1) x = (x + y) % c;
-        y = (y * 2) % c;
+        if(b % 2 == 1) x = (x + y) % m;
+        y = (y * 2) % m;
         b /= 2;
     }
     
-    return x % c;
+    return x % m;
 }
 
 
