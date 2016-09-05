@@ -111,7 +111,7 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 
 std::size_t inpal::prime::prime_locate(std::size_t pos)
 {
-    //prime number position located at sieve(index - 1)
+    //prime number position located at sieve[index - 1]
     pos -= 1;
         
     //return values for input less or equal to 13
@@ -154,12 +154,6 @@ std::size_t inpal::prime::prime_count(std::size_t range)
 }
 
 
-double inpal::prime::prime_density(double range)
-{
-    return prime_count(range) / range;
-}
-
-
 bool inpal::prime::prime_test(std::size_t num)
 {
     if(num < 2 || (num != 2 && num % 2 == 0)) return false;
@@ -187,25 +181,25 @@ bool inpal::prime::prime_test(std::size_t num)
 }
 
 
-bool inpal::prime::twin_test(std::size_t num)
+bool inpal::prime::twin_prime_test(std::size_t num)
 {
     return prime_test(num) && (prime_test(num - 2) || prime_test(num + 2));
 }
 
 
-bool inpal::prime::cousin_test(std::size_t num)
+bool inpal::prime::cousin_prime_test(std::size_t num)
 {
     return  prime_test(num) && (prime_test(num - 4) || prime_test(num + 4));
 }
 
 
-bool inpal::prime::sexy_test(std::size_t num)
+bool inpal::prime::sexy_prime_test(std::size_t num)
 {
     return num != 3 && prime_test(num) && (prime_test(num - 6) || prime_test(num + 6));
 }
 
 
-std::size_t inpal::prime::max_palprime(std::size_t range)
+std::size_t inpal::prime::max_palindromic_prime(std::size_t range)
 {
     if(range < 2) throw std::invalid_argument("There are no palindromic prime numbers less than 2");
     
