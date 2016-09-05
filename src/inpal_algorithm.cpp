@@ -2,7 +2,7 @@
 //  inpal_algorithm.cpp
 //  Inverse Palindrome Library
 //
-//  Created by Bryan Triana 
+//  Created by Bryan Triana
 //  Copyright © 2016 Inverse Palindrome. All rights reserved.
 //
 
@@ -117,7 +117,7 @@ std::size_t inpal::algorithm::pollard_rho(std::size_t num)
 }
 
 
-bool inpal::algorithm::pal_test(std::size_t num)
+bool inpal::algorithm::palindrome_test(std::size_t num)
 {
     std::string rev = std::to_string(num);
     
