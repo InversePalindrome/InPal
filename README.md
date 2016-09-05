@@ -31,22 +31,19 @@
 - **prime_count:** Counts the amount of primes under a given number.
 
 
-- **prime_density:** Calculates the density of prime numbers under a given range.
-
-
 - **prime_test:** Primality test for a number, returns a boolean value(returns 'true' if prime).
 
 
-- **twin_test:** Tests if a given number is a twin prime, returns a boolean value(returns 'true' if it is a twin prime).
+- **twin_prime_test:** Tests if a given number is a twin prime, returns a boolean value(returns 'true' if it is a twin prime).
 
 
-- **cousin_test:** Tests if a given number is a cousin prime, returns a boolean value(returns 'true' if it is a cousin prime).
+- **cousin_prime_test:** Tests if a given number is a cousin prime, returns a boolean value(returns 'true' if it is a cousin prime).
 
 
-- **sexy_test:** Tests if a given number is a sexy prime, returns a boolean value(returns 'true' if it is a sexy prime).
+- **sexy_prime_test:** Tests if a given number is a sexy prime, returns a boolean value(returns 'true' if it is a sexy prime).
 
 
-- **max_palprime:** Finds the highest palindromic prime less or equal to the number given.
+- **max_palindromic_prime:** Finds the highest palindromic prime less or equal to the number given.
 
 
 - **max_factor:** Finds the highest prime factor of a given number.
@@ -73,6 +70,6 @@
 - **pollard_rho:** Finds a random factor of a given number.
 
 
-- **pal_test:** Tests if a given number is a palindrome(returns 'true' if the number is a palindrome).
+- **palindrome_test:** Tests if a given number is a palindrome(returns 'true' if the number is a palindrome).
 
 
