@@ -16,14 +16,14 @@
 
 namespace inpal
 {
-   namespace algorithm
+    namespace algorithm
     {
         std::size_t gcd(std::size_t a, std::size_t b);
         std::size_t lcm(std::size_t a, std::size_t b);
         std::size_t modulo(std::size_t a, std::size_t b, std::size_t c);
         std::size_t mulmod(std::size_t a, std::size_t b, std::size_t c);
         std::size_t pollard_rho(std::size_t num);
-        bool pal_test(std::size_t num);
+        bool palindrome_test(std::size_t num);
     }
 }
 
