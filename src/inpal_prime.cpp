@@ -80,7 +80,7 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
         {
             primes.push_back(m);
             
-            //decomposes the factors into primes
+            //decompose the factors 
             for(auto& i : factors)
             {
                 std::size_t k = i;
