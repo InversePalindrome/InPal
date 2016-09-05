@@ -18,7 +18,7 @@ std::vector<std::size_t> inpal::prime::prime_list(std::size_t range)
     if(range < 2) return p_list;
     
     p_list.push_back(2);
-
+    
     for(std::size_t i = 3; i <= range; i += 2) if(primes[i]) p_list.push_back(i);
     
     return p_list;
@@ -81,15 +81,15 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
             primes.push_back(m);
             
             //decomposes the factors into primes
-            for(auto& iterator : factors)
+            for(auto& i : factors)
             {
-                std::size_t k = iterator;
+                std::size_t k = i;
                 if(k % m == 0)
                 {
                     do k /= m;
                     while(k % m == 0);
                     
-                    iterator = k;
+                    i = k;
                 }
             }
         }
@@ -111,18 +111,16 @@ std::vector<std::size_t> inpal::prime::factor_list(std::size_t num)
 
 std::size_t inpal::prime::prime_locate(std::size_t pos)
 {
-    //index starts at 1 instead of 0, eg 1st prime is 2
-    pos = pos - 1;
-    
+    //prime number position located at sieve(index - 1)
+    pos -= 1;
+        
     //return values for input less or equal to 13
-    const auto& small_primes = prime_list(43);
-    if(pos < 14) return small_primes[pos];
+    if(pos < 14) return prime_list(43)[pos];
     
     //limits the size of the sieve
     const std::size_t limit = ceil(pos * log(pos) + pos * log(log(pos)));
-    const auto& primes = prime_list(limit);
     
-    return primes[pos];
+    return prime_list(limit)[pos];
 }
 
 
