@@ -113,7 +113,7 @@ std::size_t inpal::prime::prime_locate(std::size_t pos)
 {
     //prime number position located at sieve[index - 1]
     pos -= 1;
-        
+    
     //return values for input less or equal to 13
     if(pos < 14) return prime_list(43)[pos];
     
@@ -203,7 +203,7 @@ std::size_t inpal::prime::max_palindromic_prime(std::size_t range)
 {
     if(range < 2) throw std::invalid_argument("There are no palindromic prime numbers less than 2");
     
-    for(std::size_t i = range; i >= 2; --i) if(prime_test(i) && algorithm::pal_test(i)) return i;
+    for(std::size_t i = range; i >= 2; --i) if(prime_test(i) && algorithm::palindrome_test(i)) return i;
     
     return 2;
 }
