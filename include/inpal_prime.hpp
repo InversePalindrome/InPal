@@ -24,16 +24,16 @@ namespace inpal
         std::vector<std::size_t> prime_list(std::size_t range);
         std::vector<bool> prime_sieve(std::size_t range);
         std::vector<std::size_t> factor_list(std::size_t num);
+        
         //special purpose functions
         std::size_t prime_locate(std::size_t pos);
         std::size_t max_prime(std::size_t range);
         std::size_t prime_count(std::size_t range);
-        double prime_density(double range);
         bool prime_test(std::size_t num);
-        bool twin_test(std::size_t num);
-        bool cousin_test(std::size_t num);
-        bool sexy_test(std::size_t num);
-        std::size_t max_palprime(std::size_t range);
+        bool twin_prime_test(std::size_t num);
+        bool cousin_prime_test(std::size_t num);
+        bool sexy_prime_test(std::size_t num);
+        std::size_t max_palindromic_prime(std::size_t range);
         std::size_t max_factor(std::size_t num);
         std::size_t factor_count(std::size_t num);
     }
