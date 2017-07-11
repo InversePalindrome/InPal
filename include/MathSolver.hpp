@@ -31,12 +31,13 @@ public:
 	std::string getStringVariable(const std::string& variableName);
 
 	void setTask(const std::string& task);
-	
+
 	void addVariable(const std::string& variableName, T& variable);
 	void addConstant(const std::string& constantName, T& constant);
 	void addStringVar(const std::string& stringVariableName, std::string& variable);
 	void addFunction(const std::string& functionName, exprtk::ifunction<T>& function);
 
+	void clearTask();
 	void clearSymbols();
 
 private:
@@ -72,7 +73,7 @@ MathSolver<T>::MathSolver(const std::string& task) :
 	error()
 {
 	expression.register_symbol_table(symbolTable);
-	
+
 	loadConstants();
 	loadFunctions();
 }
@@ -86,7 +87,7 @@ bool MathSolver<T>::solve()
 		{
 			this->error = this->parser.get_error(i);
 
-			std::cerr << "Error: " << i << " [LINE]: " << this->error.line_no << " [COL]: " << this->error.column_no << " [POS]: " << this->error.token.position 
+			std::cerr << "Error: " << i << " [LINE]: " << this->error.line_no << " [COL]: " << this->error.column_no << " [POS]: " << this->error.token.position
 				<< " Type: " << exprtk::parser_error::to_str(this->error.mode).c_str() << " Message: " << this->error.diagnostic.c_str() << "\n";
 		}
 
@@ -148,6 +149,12 @@ template<typename T>
 void MathSolver<T>::addFunction(const std::string& functionName, exprtk::ifunction<T>& function)
 {
 	this->symbolTable.add_function(functionName, function);
+}
+
+template<typename T>
+void MathSolver<T>::clearTask()
+{
+	this->task.clear();
 }
 
 template<typename T>
