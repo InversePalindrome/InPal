@@ -36,6 +36,7 @@ public:
 	void addConstant(const std::string& constantName, T& constant);
 	void addStringVar(const std::string& stringVariableName, std::string& variable);
 	void addFunction(const std::string& functionName, exprtk::ifunction<T>& function);
+	void addCompositorFunction(const std::string& functionName, const std::string& functionBody, const std::vector<std::string>& parameters);
 
 	void clearTask();
 	void clearSymbols();
@@ -44,6 +45,7 @@ private:
 	exprtk::parser<T> parser;
 	exprtk::expression<T> expression;
 	exprtk::symbol_table<T> symbolTable;
+	exprtk::function_compositor<T> compositor;
 
 	exprtk::parser_error::type error;
 
@@ -69,6 +71,7 @@ MathSolver<T>::MathSolver(const std::string& task) :
 	parser(),
 	expression(),
 	symbolTable(),
+	compositor(symbolTable),
 	task(task),
 	error()
 {
@@ -149,6 +152,19 @@ template<typename T>
 void MathSolver<T>::addFunction(const std::string& functionName, exprtk::ifunction<T>& function)
 {
 	this->symbolTable.add_function(functionName, function);
+}
+
+template<typename T>
+void MathSolver<T>::addCompositorFunction(const std::string& functionName, const std::string& functionBody, const std::vector<std::string>& parameters)
+{
+	exprtk::function_compositor<T>::function function(functionName, functionBody);
+
+	for (const auto& parameter : parameters)
+	{
+		function.var(parameter);
+	}
+
+	this->compositor.add(function);
 }
 
 template<typename T>

@@ -7,6 +7,8 @@ InversePalindrome.com
 
 #pragma once
 
+#include "MathData.hpp"
+
 #include <wx/frame.h>
 #include <wx/menu.h>
 
@@ -17,4 +19,9 @@ public:
 	Window(const std::string& title);
 
 private:
+	MathData<double> mathData;
+
+	void OnAddVariable(wxCommandEvent& event);
+	void OnAddConstant(wxCommandEvent& event);
+	void OnAddFunction(wxCommandEvent& event);
 };

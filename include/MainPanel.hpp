@@ -7,7 +7,7 @@ InversePalindrome.com
 
 #pragma once
 
-#include "MathSolver.hpp"
+#include "MathData.hpp"
 
 #include <wx/panel.h>
 #include <wx/button.h>
@@ -17,10 +17,10 @@ InversePalindrome.com
 class MainPanel : public wxPanel
 {
 public:
-	MainPanel(wxWindow* parent);
+	MainPanel(wxWindow* parent, MathData<double>* mathData);
 
 private:
-	MathSolver<double> mathSolver;
+	MathData<double>* mathData;
 
 	wxTextCtrl* taskEntry;
 	wxTextCtrl* taskSolution;
