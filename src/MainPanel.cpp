@@ -6,20 +6,23 @@ InversePalindrome.com
 
 
 #include "MainPanel.hpp"
+
 #include <wx/sizer.h>
 
+#include <boost/format.hpp>
 
-MainPanel::MainPanel(wxWindow* parent) :
+
+MainPanel::MainPanel(wxWindow* parent, MathData<double>* mathData) :
 	wxPanel(parent, wxID_ANY),
-	mathSolver(),
+	mathData(mathData),
 	taskEntry(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(700u, 600u), wxTE_MULTILINE)),
 	taskSolution(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(700u, 50u), wxTE_READONLY)),
-	solveButton(new wxButton(this, wxNewId(), "Solve")),
+	solveButton(new wxButton(this, wxID_ANY, "Solve")),
 	clearButton(new wxButton(this, wxID_ANY, "Clear"))
 {
 	auto* topSizer = new wxBoxSizer(wxVERTICAL);
 	auto* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
-
+	
 	topSizer->Add(taskSolution, 0u, wxEXPAND | wxALL, 10u);
 	topSizer->AddSpacer(20u);
 
@@ -33,6 +36,9 @@ MainPanel::MainPanel(wxWindow* parent) :
 
 	topSizer->Add(taskEntry, 0u, wxEXPAND | wxALL, 10u);
 
+	topSizer->Fit(this);
+	topSizer->SetSizeHints(this);
+
 	SetSizer(topSizer);
 
 	taskSolution->SetFont(wxFont(30u, wxFontFamily::wxFONTFAMILY_DEFAULT, wxFontStyle::wxFONTSTYLE_NORMAL, wxFontWeight::wxFONTWEIGHT_BOLD));
@@ -44,15 +50,15 @@ MainPanel::MainPanel(wxWindow* parent) :
 
 void MainPanel::OnSolveTask(wxMouseEvent& event)
 {
-	this->mathSolver.setTask(taskEntry->GetValue().ToStdString());
-	this->mathSolver.solve();
+	this->mathData->mathSolver.setTask(taskEntry->GetValue().ToStdString());
+	this->mathData->mathSolver.solve();
 
-	this->taskSolution->SetValue(std::to_string(this->mathSolver.getValue()));
+	this->taskSolution->SetValue(boost::str(boost::format("%.15f") % this->mathData->mathSolver.getValue()));
 }
 
 void MainPanel::OnClearTask(wxMouseEvent& event)
 {
-	this->mathSolver.clearTask();
+	this->mathData->mathSolver.clearTask();
 
 	this->taskEntry->Clear();
 	this->taskSolution->Clear();
