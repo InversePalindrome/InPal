@@ -24,4 +24,8 @@ private:
 	void OnAddVariable(wxCommandEvent& event);
 	void OnAddConstant(wxCommandEvent& event);
 	void OnAddFunction(wxCommandEvent& event);
+
+	void OnModifyVariables(wxCommandEvent& event);
+	void OnModifyConstants(wxCommandEvent& event);
+	void OnModifyFunctions(wxCommandEvent& event);
 };

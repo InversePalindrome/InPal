@@ -19,4 +19,5 @@ struct MathData
 
 	std::unordered_map<std::string, T> variables;
 	std::unordered_map<std::string, T> constants;
+	std::unordered_map<std::string, std::pair<std::string, std::string>> functions;
 };

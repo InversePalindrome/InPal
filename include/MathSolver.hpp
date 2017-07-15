@@ -36,7 +36,12 @@ public:
 	void addConstant(const std::string& constantName, T& constant);
 	void addStringVar(const std::string& stringVariableName, std::string& variable);
 	void addFunction(const std::string& functionName, exprtk::ifunction<T>& function);
-	void addCompositorFunction(const std::string& functionName, const std::string& functionBody, const std::vector<std::string>& parameters);
+	void addCompositorFunction(const std::string& functionName, const std::vector<std::string>& parameters, const std::string& functionBody);
+
+	void removeVariable(const std::string& variableName);
+	void removeConstant(const std::string& constantName);
+	void removeStringVar(const std::string& stringVariableName);
+	void removeFunction(const std::string& functionName);
 
 	void clearTask();
 	void clearSymbols();
@@ -155,7 +160,7 @@ void MathSolver<T>::addFunction(const std::string& functionName, exprtk::ifuncti
 }
 
 template<typename T>
-void MathSolver<T>::addCompositorFunction(const std::string& functionName, const std::string& functionBody, const std::vector<std::string>& parameters)
+void MathSolver<T>::addCompositorFunction(const std::string& functionName, const std::vector<std::string>& parameters, const std::string& functionBody)
 {
 	exprtk::function_compositor<T>::function function(functionName, functionBody);
 
@@ -164,7 +169,31 @@ void MathSolver<T>::addCompositorFunction(const std::string& functionName, const
 		function.var(parameter);
 	}
 
-	this->compositor.add(function);
+	this->compositor.add(function, true);
+}
+
+template<typename T>
+void MathSolver<T>::removeVariable(const std::string& variableName)
+{
+	this->symbolTable.remove_variable(variableName);
+}
+
+template<typename T>
+void MathSolver<T>::removeConstant(const std::string& constantName)
+{
+	this->symbolTable.remove_variable(constantName);
+}
+
+template<typename T>
+void MathSolver<T>::removeStringVar(const std::string& stringVariableName)
+{
+	this->symbolTable.remove_stringvar(stringVariableName);
+}
+
+template<typename T>
+void MathSolver<T>::removeFunction(const std::string& functionName)
+{
+	this->symbolTable.remove_function(functionName);
 }
 
 template<typename T>
