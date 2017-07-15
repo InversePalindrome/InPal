@@ -19,12 +19,18 @@ AddConstantWindow::AddConstantWindow(wxWindow* parent, MathData<double>* mathDat
 	valueEntry(new wxTextCtrl(this, wxID_ANY))
 {
 	SetBackgroundColour(wxColor(192u, 197u, 206u));
-
+	
 	auto* topSizer = new wxBoxSizer(wxVERTICAL);
 	auto* gridSizer = new wxGridSizer(2u, 2u, 0u, 0u);
 	
 	auto* nameText = new wxStaticText(this, wxID_ANY, "Name");
 	auto* valueText = new wxStaticText(this, wxID_ANY, "Value");
+
+	auto& font = nameText->GetFont();
+	font.SetWeight(wxFONTWEIGHT_BOLD);
+
+	nameText->SetFont(font);
+	valueText->SetFont(font);
 
 	auto* addButton = new wxButton(this, wxID_ADD, "Add");
 

@@ -29,6 +29,13 @@ AddFunctionWindow::AddFunctionWindow(wxWindow* parent, MathData<double>* mathDat
 	auto* parameterText = new wxStaticText(this, wxID_ANY, "Parameters");
 	auto* bodyText = new wxStaticText(this, wxID_ANY, "Body");
 
+	auto& font = nameText->GetFont();
+	font.SetWeight(wxFONTWEIGHT_BOLD);
+
+	nameText->SetFont(font);
+	parameterText->SetFont(font);
+	bodyText->SetFont(font);
+
 	auto* addButton = new wxButton(this, wxID_ADD, "Add");
 
 	sizer->Add(nameText, 0u, wxALL, 5u);
@@ -51,10 +58,13 @@ void AddFunctionWindow::OnAddFunction(wxMouseEvent& event)
 {
 	std::vector<std::string> parameterTokens;
 
-	boost::split(parameterTokens, this->parameterEntry->GetValue().ToStdString(), boost::is_any_of(" ,"));
+	boost::split(parameterTokens, this->parameterEntry->GetValue().ToStdString(), boost::is_any_of(", "));
 	
-	this->mathData->mathSolver.addCompositorFunction(this->nameEntry->GetValue().ToStdString(), 
-		this->bodyEntry->GetValue().ToStdString(), parameterTokens);
+	this->mathData->mathSolver.addCompositorFunction(this->nameEntry->GetValue().ToStdString(), parameterTokens,
+		this->bodyEntry->GetValue().ToStdString());
+
+	this->mathData->functions.emplace(this->nameEntry->GetValue().ToStdString(), 
+		std::make_pair(this->parameterEntry->GetValue().ToStdString(), this->bodyEntry->GetValue().ToStdString())); 
 
 	this->nameEntry->Clear();
 	this->parameterEntry->Clear();

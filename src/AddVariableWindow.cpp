@@ -26,6 +26,12 @@ AddVariableWindow::AddVariableWindow(wxWindow* parent, MathData<double>* mathDat
 	auto* nameText = new wxStaticText(this, wxID_ANY, "Name");
 	auto* valueText = new wxStaticText(this, wxID_ANY, "Value");
 
+	auto& font = nameText->GetFont();
+	font.SetWeight(wxFONTWEIGHT_BOLD);
+
+	nameText->SetFont(font);
+	valueText->SetFont(font);
+
 	auto* addButton = new wxButton(this, wxID_ADD, "Add");
 
 	gridSizer->Add(nameText, 0u, wxALL, 5u);
