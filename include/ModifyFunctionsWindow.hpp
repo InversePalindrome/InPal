@@ -35,4 +35,5 @@ private:
 
 	void OnSelectFunction(wxMouseEvent& event);
 	void OnModifyFunction(wxMouseEvent& event);
+	void OnDeleteFunction(wxMouseEvent& event);
 };

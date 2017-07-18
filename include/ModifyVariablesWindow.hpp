@@ -10,7 +10,11 @@ InversePalindrome.com
 #include "MathData.hpp"
 
 #include <wx/minifram.h>
+#include <wx/sizer.h>
+#include <wx/stattext.h>
 #include <wx/textctrl.h>
+
+#include <tuple>
 
 
 class ModifyVariablesWindow : public wxMiniFrame
@@ -21,7 +25,10 @@ public:
 private:
 	MathData<double>* mathData;
 
-	std::unordered_map<std::string, wxTextCtrl*> variableEntries;
+	wxGridSizer* gridSizer;
+
+	std::unordered_map <std::size_t, std::tuple<wxStaticText*, wxTextCtrl*, wxButton*>> variableWidgets;
 
 	void OnModifyVariable(wxMouseEvent& event);
+	void OnDeleteVariable(wxMouseEvent& event);
 };

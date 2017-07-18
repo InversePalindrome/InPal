@@ -10,9 +10,11 @@ InversePalindrome.com
 #include "MathData.hpp"
 
 #include <wx/minifram.h>
+#include <wx/sizer.h>
+#include <wx/stattext.h>
 #include <wx/textctrl.h>
 
-#include <unordered_map>
+#include <tuple>
 
 
 class ModifyConstantsWindow : public wxMiniFrame
@@ -23,7 +25,10 @@ public:
 private:
 	MathData<double>* mathData;
 
-	std::unordered_map<std::string, wxTextCtrl*> constantEntries;
+	wxGridSizer* gridSizer;
+
+	std::unordered_map <std::size_t, std::tuple<wxStaticText*, wxTextCtrl*, wxButton*>> constantWidgets;
 
 	void OnModifyConstant(wxMouseEvent& event);
+	void OnDeleteConstant(wxMouseEvent& event);
 };

@@ -39,7 +39,6 @@ public:
 	void addCompositorFunction(const std::string& functionName, const std::vector<std::string>& parameters, const std::string& functionBody);
 
 	void removeVariable(const std::string& variableName);
-	void removeConstant(const std::string& constantName);
 	void removeStringVar(const std::string& stringVariableName);
 	void removeFunction(const std::string& functionName);
 
@@ -176,12 +175,6 @@ template<typename T>
 void MathSolver<T>::removeVariable(const std::string& variableName)
 {
 	this->symbolTable.remove_variable(variableName);
-}
-
-template<typename T>
-void MathSolver<T>::removeConstant(const std::string& constantName)
-{
-	this->symbolTable.remove_variable(constantName);
 }
 
 template<typename T>
