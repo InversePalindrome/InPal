@@ -7,16 +7,17 @@ InversePalindrome.com
 
 #include "ModifyConstantsWindow.hpp"
 
-#include <wx/sizer.h>
 #include <wx/button.h>
-#include <wx/stattext.h>
 #include <wx/scrolwin.h>
+
+#include <limits>
 
 
 ModifyConstantsWindow::ModifyConstantsWindow(wxWindow* parent, MathData<double>* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Modify Constants", wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
-	constantEntries()
+	gridSizer(new wxGridSizer(mathData->constants.size(), 3u, 0u, 0u)),
+	constantWidgets()
 {
 	SetBackgroundColour(wxColor(192u, 197u, 206u));
 
@@ -35,20 +36,23 @@ ModifyConstantsWindow::ModifyConstantsWindow(wxWindow* parent, MathData<double>*
 	labelSizer->Add(nameText, 0u, wxRIGHT | wxLEFT, 50u);
 	labelSizer->Add(valueText, 0u, wxRIGHT | wxLEFT, 50u);
 
-	auto* scrollPanel = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxSize(260u, 200u));
-	auto* gridSizer = new wxGridSizer(mathData->constants.size(), 2u, 0u, 0u);
+	auto* scrollPanel = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxSize(400u, 250u));
 
 	for (const auto& constant : mathData->constants)
 	{
-	    auto* constantName = new wxStaticText(scrollPanel, wxID_ANY, constant.first);
-	    auto* valueText = new wxTextCtrl(scrollPanel, wxID_ANY, std::to_string(constant.second));
+		auto* constantName = new wxStaticText(scrollPanel, wxID_ANY, constant.first);
+		auto* valueText = new wxTextCtrl(scrollPanel, wxID_ANY, std::to_string(constant.second));
+		auto* deleteButton = new wxButton(scrollPanel, NewControlId(), "Delete");
 
-	    gridSizer->Add(constantName, 0u, wxALL | wxALIGN_TOP | wxALIGN_CENTER_HORIZONTAL, 10u);
-	    gridSizer->Add(valueText, 0u, wxALL | wxALIGN_TOP | wxALIGN_CENTER_HORIZONTAL, 10u);
+		gridSizer->Add(constantName, 0u, wxALIGN_CENTER_HORIZONTAL | wxALIGN_TOP | wxALL, 10u);
+		gridSizer->Add(valueText, 0u, wxALIGN_CENTER_HORIZONTAL | wxALIGN_TOP | wxALL, 10u);
+		gridSizer->Add(deleteButton, 0u, wxALIGN_CENTER_HORIZONTAL | wxALIGN_TOP | wxALL, 10u);
 
-		constantEntries.emplace(constant.first, valueText);
+		constantWidgets.emplace(deleteButton->GetId(), std::make_tuple(constantName, valueText, deleteButton));
+
+		deleteButton->Bind(wxEVT_LEFT_DOWN, &ModifyConstantsWindow::OnDeleteConstant, this);
 	}
-	
+
 	scrollPanel->SetSizer(gridSizer);
 
 	scrollPanel->FitInside();
@@ -71,14 +75,46 @@ ModifyConstantsWindow::ModifyConstantsWindow(wxWindow* parent, MathData<double>*
 
 void ModifyConstantsWindow::OnModifyConstant(wxMouseEvent& event)
 {
-	for (const auto& constantEntry : this->constantEntries)
+	for (auto& widgetGroup : this->constantWidgets)
 	{
-		this->mathData->mathSolver.removeConstant(constantEntry.first);
+		this->mathData->mathSolver.removeVariable(std::get<0>(widgetGroup.second)->GetLabel().ToStdString());
 
-		this->mathData->constants.at(constantEntry.first) = std::stod(constantEntry.second->GetValue().ToStdString());
+		double value;
 
-		this->mathData->mathSolver.addConstant(constantEntry.first, this->mathData->constants.at(constantEntry.first));
+		try
+		{
+			value = std::stod(std::get<1>(widgetGroup.second)->GetValue().ToStdString());
+		}
+		catch (const std::invalid_argument& e)
+		{
+			value = std::numeric_limits<double>::quiet_NaN();
+		}
+
+		this->mathData->constants.at(std::get<0>(widgetGroup.second)->GetLabel().ToStdString()) = value;
+
+		this->mathData->mathSolver.addConstant(std::get<0>(widgetGroup.second)->GetLabel().ToStdString(), 
+			this->mathData->constants.at(std::get<0>(widgetGroup.second)->GetLabel().ToStdString()));
 	}
 
 	this->Close(true);
+}
+
+void ModifyConstantsWindow::OnDeleteConstant(wxMouseEvent& event)
+{
+	auto& widgetGroup = this->constantWidgets.at(event.GetId());
+
+	this->mathData->mathSolver.removeVariable(std::get<0>(widgetGroup)->GetLabel().ToStdString());
+
+	this->mathData->constants.at(std::get<0>(widgetGroup)->GetLabel().ToStdString()) = std::numeric_limits<double>::quiet_NaN();
+
+	this->mathData->mathSolver.addConstant(std::get<0>(widgetGroup)->GetLabel().ToStdString(),
+		this->mathData->constants.at(std::get<0>(widgetGroup)->GetLabel().ToStdString()));
+
+	this->mathData->constants.erase(std::get<0>(widgetGroup)->GetLabel().ToStdString());
+
+	std::get<0>(widgetGroup)->Destroy();
+	std::get<1>(widgetGroup)->Destroy();
+	std::get<2>(widgetGroup)->Destroy();
+
+	this->gridSizer->Layout();
 }

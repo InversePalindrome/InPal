@@ -7,16 +7,15 @@ InversePalindrome.com
 
 #include "ModifyVariablesWindow.hpp"
 
-#include <wx/sizer.h>
 #include <wx/button.h>
-#include <wx/stattext.h>
 #include <wx/scrolwin.h>
 
 
 ModifyVariablesWindow::ModifyVariablesWindow(wxWindow* parent, MathData<double>* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Modify Variables", wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
-	variableEntries()
+	gridSizer(new wxGridSizer(mathData->variables.size(), 3u, 0u, 0u)),
+	variableWidgets()
 {
 	SetBackgroundColour(wxColor(192u, 197u, 206u));
 	
@@ -35,18 +34,21 @@ ModifyVariablesWindow::ModifyVariablesWindow(wxWindow* parent, MathData<double>*
 	labelSizer->Add(nameText, 0u, wxRIGHT | wxLEFT, 50u);
 	labelSizer->Add(valueText, 0u, wxRIGHT | wxLEFT, 50u);
 
-	auto* scrollPanel = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxSize(260u, 200u));
-	auto* gridSizer = new wxGridSizer(mathData->variables.size(), 2u, 0u, 0u);
-
+	auto* scrollPanel = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxSize(400u, 250u));
+		
 	for (const auto& variable : mathData->variables)
 	{
 		auto* variableName = new wxStaticText(scrollPanel, wxID_ANY, variable.first);
 		auto* valueText = new wxTextCtrl(scrollPanel, wxID_ANY, std::to_string(variable.second));
+		auto* deleteButton = new wxButton(scrollPanel, NewControlId(), "Delete");
 
-		gridSizer->Add(variableName, 0u, wxALL | wxALIGN_TOP | wxALIGN_CENTER_HORIZONTAL, 10u);
-		gridSizer->Add(valueText, 0u, wxALL | wxALIGN_TOP | wxALIGN_CENTER_HORIZONTAL, 10u);
+		gridSizer->Add(variableName, 0u, wxALIGN_CENTER_HORIZONTAL | wxALIGN_TOP | wxALL, 10u);
+		gridSizer->Add(valueText, 0u, wxALIGN_CENTER_HORIZONTAL | wxALIGN_TOP | wxALL, 10u);
+		gridSizer->Add(deleteButton, 0u, wxALIGN_CENTER_HORIZONTAL | wxALIGN_TOP | wxALL, 10u);
+		
+	    variableWidgets.emplace(deleteButton->GetId(), std::make_tuple(variableName, valueText, deleteButton));
 
-		variableEntries.emplace(variable.first, valueText);
+		deleteButton->Bind(wxEVT_LEFT_DOWN, &ModifyVariablesWindow::OnDeleteVariable, this);
 	}
 
 	scrollPanel->SetSizer(gridSizer);
@@ -71,10 +73,35 @@ ModifyVariablesWindow::ModifyVariablesWindow(wxWindow* parent, MathData<double>*
 
 void ModifyVariablesWindow::OnModifyVariable(wxMouseEvent& event)
 {
-	for (const auto& variableEntry : this->variableEntries)
+	for (auto& widgetGroup : this->variableWidgets)
 	{
-		this->mathData->variables.at(variableEntry.first) = std::stod(variableEntry.second->GetValue().ToStdString());
+		double value;
+
+		try
+		{
+			value = std::stod(std::get<1>(widgetGroup.second)->GetValue().ToStdString());
+		}
+		catch (const std::invalid_argument& e)
+		{
+			value = std::numeric_limits<double>::quiet_NaN();
+		}
+
+		this->mathData->variables.at(std::get<0>(widgetGroup.second)->GetLabel().ToStdString()) = value;
 	}
 
 	this->Close(true);
+}
+
+void ModifyVariablesWindow::OnDeleteVariable(wxMouseEvent& event)
+{
+	auto& widgetGroup = this->variableWidgets.at(event.GetId());
+
+	this->mathData->variables.erase(std::get<0>(widgetGroup)->GetLabel().ToStdString());
+	this->mathData->mathSolver.removeVariable(std::get<0>(widgetGroup)->GetLabel().ToStdString());
+
+	std::get<0>(widgetGroup)->Destroy();
+	std::get<1>(widgetGroup)->Destroy();
+	std::get<2>(widgetGroup)->Destroy();
+
+	this->gridSizer->Layout();
 }

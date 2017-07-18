@@ -56,6 +56,11 @@ AddFunctionWindow::AddFunctionWindow(wxWindow* parent, MathData<double>* mathDat
 
 void AddFunctionWindow::OnAddFunction(wxMouseEvent& event)
 {
+	if (nameEntry->IsEmpty())
+	{
+		return;
+	}
+
 	std::vector<std::string> parameterTokens;
 
 	boost::split(parameterTokens, this->parameterEntry->GetValue().ToStdString(), boost::is_any_of(", "));

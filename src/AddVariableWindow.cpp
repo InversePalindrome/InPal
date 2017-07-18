@@ -55,10 +55,26 @@ void AddVariableWindow::OnAddVariable(wxMouseEvent& event)
 {
 	const auto& variableName = this->nameEntry->GetValue().ToStdString();
 
-	this->mathData->variables.emplace(variableName, std::stod(this->valueEntry->GetValue().ToStdString()));
+	double value;
 
-	this->mathData->mathSolver.addVariable(variableName, this->mathData->variables.at(variableName));
+	try
+	{
+		value = std::stod(this->valueEntry->GetValue().ToStdString());
+	}
+	catch (const std::invalid_argument& e)
+	{
+		value = std::numeric_limits<double>::quiet_NaN();
+	}
+
+	if (!variableName.empty())
+	{
+		this->mathData->variables.emplace(variableName, value);
+
+		this->mathData->mathSolver.addVariable(variableName, this->mathData->variables.at(variableName));
+	}
 
 	this->nameEntry->Clear();
 	this->valueEntry->Clear();
+
+	this->Layout();
 }

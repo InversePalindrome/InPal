@@ -24,6 +24,9 @@ ModifyFunctionsWindow::ModifyFunctionsWindow(wxWindow* parent, MathData<double>*
 {
 	SetBackgroundColour(wxColor(192u, 197u, 206u));
 
+	secondaryPanel->Hide();
+	mainPanel->Show();
+
 	auto* scrollPanel = new wxScrolledWindow(mainPanel, wxID_ANY, wxDefaultPosition, wxSize(200u, 300u));
 
 	auto* nameText = new wxStaticText(scrollPanel, wxID_ANY, "Name");
@@ -59,9 +62,6 @@ ModifyFunctionsWindow::ModifyFunctionsWindow(wxWindow* parent, MathData<double>*
 	mainSizer->Fit(this);
 	mainSizer->SetSizeHints(this);
 
-	secondaryPanel->Hide();
-	mainPanel->Show();
-
 	SetSizer(mainSizer);
 }
 
@@ -85,6 +85,12 @@ void ModifyFunctionsWindow::OnSelectFunction(wxMouseEvent& event)
 	this->bodyEntry->SetValue(this->mathData->functions.at(selectedButton->GetLabel().ToStdString()).second);
 
 	auto* modifyButton = new wxButton(secondaryPanel, wxID_ANY, "Modify");
+	auto* deleteButton = new wxButton(secondaryPanel, wxID_DELETE);
+
+	auto* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
+
+	buttonSizer->Add(modifyButton, 0u, wxALIGN_CENTER | wxALL, 5u);
+	buttonSizer->Add(deleteButton, 0u, wxALIGN_CENTER | wxALL, 5u);
 
 	auto* bottomSizer = new wxBoxSizer(wxVERTICAL);
 
@@ -94,7 +100,7 @@ void ModifyFunctionsWindow::OnSelectFunction(wxMouseEvent& event)
 	bottomSizer->Add(parametersEntry, 0u, wxEXPAND | wxALL, 5u);
 	bottomSizer->Add(bodyText, 0u, wxALL, 5u);
 	bottomSizer->Add(bodyEntry, 0u, wxALL, 5u);
-	bottomSizer->Add(modifyButton, 0u, wxALIGN_CENTER | wxALL, 5u);
+	bottomSizer->Add(buttonSizer, 0u, wxALIGN_CENTER | wxALL, 5u);
 
 	this->secondaryPanel->SetSizer(bottomSizer);
 
@@ -113,6 +119,7 @@ void ModifyFunctionsWindow::OnSelectFunction(wxMouseEvent& event)
 	this->mainSizer->SetSizeHints(this);
 
 	modifyButton->Bind(wxEVT_LEFT_DOWN, &ModifyFunctionsWindow::OnModifyFunction, this);
+	deleteButton->Bind(wxEVT_LEFT_DOWN, &ModifyFunctionsWindow::OnDeleteFunction, this);
 }
 
 void ModifyFunctionsWindow::OnModifyFunction(wxMouseEvent& event)
@@ -125,6 +132,14 @@ void ModifyFunctionsWindow::OnModifyFunction(wxMouseEvent& event)
 
 	this->mathData->functions.at(this->functionName->GetLabel().ToStdString()) = 
 		std::make_pair(this->parametersEntry->GetValue().ToStdString(), this->bodyEntry->GetValue().ToStdString());
+
+	this->Close();
+}
+
+void ModifyFunctionsWindow::OnDeleteFunction(wxMouseEvent& event)
+{
+	this->mathData->mathSolver.removeFunction(this->functionName->GetLabel().ToStdString());
+	this->mathData->functions.erase(this->functionName->GetLabel().ToStdString());
 
 	this->Close();
 }

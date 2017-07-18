@@ -55,9 +55,23 @@ void AddConstantWindow::OnAddConstant(wxMouseEvent& event)
 {
 	const auto& constantName = this->nameEntry->GetValue().ToStdString();
 
-	this->mathData->constants.emplace(constantName, std::stod(this->valueEntry->GetValue().ToStdString()));
+	double value;
 
-	this->mathData->mathSolver.addConstant(constantName, this->mathData->constants.at(constantName)); 
+	try
+	{
+		value = std::stod(this->valueEntry->GetValue().ToStdString());
+	}
+	catch (const std::invalid_argument& e)
+	{
+		value = std::numeric_limits<double>::quiet_NaN();
+	}
+
+	if (!constantName.empty())
+	{
+		this->mathData->constants.emplace(constantName, value);
+
+		this->mathData->mathSolver.addConstant(constantName, this->mathData->constants.at(constantName));
+	}
 	
 	this->nameEntry->Clear();
 	this->valueEntry->Clear();
