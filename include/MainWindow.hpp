@@ -28,4 +28,7 @@ private:
 	void OnModifyVariables(wxCommandEvent& event);
 	void OnModifyConstants(wxCommandEvent& event);
 	void OnModifyFunctions(wxCommandEvent& event);
+
+	void OnGraphSettings(wxCommandEvent& event);
+	void OnGraphFunctions(wxCommandEvent& event);
 };

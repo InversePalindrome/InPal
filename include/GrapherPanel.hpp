@@ -22,9 +22,6 @@ public:
 private:
 	MathData<double>* mathData;
 
-	mpWindow* plotWindow;
-	mpFXYVector* functionLayer;
-
 	wxTextCtrl* graphEntry;
 
 	void OnGraphButton(wxMouseEvent& event);
