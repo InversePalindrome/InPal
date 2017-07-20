@@ -53,7 +53,7 @@ ModifyVariablesWindow::ModifyVariablesWindow(wxWindow* parent, MathData<double>*
 	scrollPanel->SetSizer(gridSizer);
 
 	scrollPanel->FitInside();
-	scrollPanel->SetScrollRate(0u, 10u);
+	scrollPanel->SetScrollRate(10u, 10u);
 
 	auto* modifyButton = new wxButton(this, wxID_ANY, "Modify");
 

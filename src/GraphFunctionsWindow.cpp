@@ -70,7 +70,7 @@ GraphFunctionsWindow::GraphFunctionsWindow(wxWindow* parent, MathData<double>* m
 	scrollPanel->SetSizer(gridSizer);
 
 	scrollPanel->FitInside();
-	scrollPanel->SetScrollRate(0u, 10u);
+	scrollPanel->SetScrollRate(10u, 10u);
 
 	topSizer->AddSpacer(5u);
 	topSizer->Add(labelSizer, 0u);

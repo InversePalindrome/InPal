@@ -49,7 +49,7 @@ ModifyFunctionsWindow::ModifyFunctionsWindow(wxWindow* parent, MathData<double>*
 	scrollPanel->SetSizer(topSizer);
 
 	scrollPanel->FitInside();
-	scrollPanel->SetScrollRate(0u, 10u);
+	scrollPanel->SetScrollRate(10u, 10u);
 
 	topSizer->Fit(this);
 	topSizer->SetSizeHints(this);
