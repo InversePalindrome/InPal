@@ -19,7 +19,7 @@ ModifyConstantsWindow::ModifyConstantsWindow(wxWindow* parent, MathData<double>*
 	gridSizer(new wxGridSizer(mathData->constants.size(), 3u, 0u, 0u)),
 	constantWidgets()
 {
-	SetBackgroundColour(wxColor(192u, 197u, 206u));
+	SetBackgroundColour(wxColor(128u, 128u, 128u));
 
 	auto* topSizer = new wxBoxSizer(wxVERTICAL);
 	auto* labelSizer = new wxBoxSizer(wxHORIZONTAL);
@@ -27,8 +27,7 @@ ModifyConstantsWindow::ModifyConstantsWindow(wxWindow* parent, MathData<double>*
 	auto* nameText = new wxStaticText(this, wxID_ANY, "Name");
 	auto* valueText = new wxStaticText(this, wxID_ANY, "Value");
 
-	auto& font = nameText->GetFont();
-	font.SetWeight(wxFONTWEIGHT_BOLD);
+	auto& font = wxFont(8u, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
 	nameText->SetFont(font);
 	valueText->SetFont(font);

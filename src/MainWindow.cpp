@@ -13,6 +13,8 @@ InversePalindrome.com
 #include "ModifyVariablesWindow.hpp"
 #include "ModifyConstantsWindow.hpp"
 #include "ModifyFunctionsWindow.hpp"
+#include "GraphSettingsWindow.hpp"
+#include "GraphFunctionsWindow.hpp"
 
 
 MainWindow::MainWindow(const std::string& title, MathData<double>* mathData) :
@@ -38,10 +40,16 @@ MainWindow::MainWindow(const std::string& title, MathData<double>* mathData) :
 	modifyMenu->Append(new wxMenuItem(modifyMenu, wxNewId(), "Constants"));
 	modifyMenu->Append(new wxMenuItem(modifyMenu, wxNewId(), "Functions"));
 
+	auto* graphMenu = new wxMenu("Graph");
+
+	graphMenu->Append(new wxMenuItem(graphMenu, wxNewId(), "Settings"));
+	graphMenu->Append(new wxMenuItem(graphMenu, wxNewId(), "Functions"));
+
 	auto* menuBar = new wxMenuBar();
 
 	menuBar->Append(addMenu, addMenu->GetTitle());
 	menuBar->Append(modifyMenu, modifyMenu->GetTitle());
+	menuBar->Append(graphMenu, graphMenu->GetTitle());
 	
 	SetMenuBar(menuBar);
 
@@ -52,8 +60,10 @@ MainWindow::MainWindow(const std::string& title, MathData<double>* mathData) :
 	modifyMenu->Bind(wxEVT_MENU, &MainWindow::OnModifyVariables, this, modifyMenu->FindItemByPosition(0u)->GetId());
 	modifyMenu->Bind(wxEVT_MENU, &MainWindow::OnModifyConstants, this, modifyMenu->FindItemByPosition(1u)->GetId());
 	modifyMenu->Bind(wxEVT_MENU, &MainWindow::OnModifyFunctions, this, modifyMenu->FindItemByPosition(2u)->GetId());
-}
 
+	graphMenu->Bind(wxEVT_MENU, &MainWindow::OnGraphSettings, this, graphMenu->FindItemByPosition(0u)->GetId());
+	graphMenu->Bind(wxEVT_MENU, &MainWindow::OnGraphFunctions, this, graphMenu->FindItemByPosition(1u)->GetId());
+}
 
 void MainWindow::OnAddVariable(wxCommandEvent& event)
 {
@@ -95,4 +105,18 @@ void MainWindow::OnModifyFunctions(wxCommandEvent& event)
 	auto* modifyFunctionsWindow = new ModifyFunctionsWindow(this, this->mathData);
 
 	modifyFunctionsWindow->Show(true);
+}
+
+void MainWindow::OnGraphSettings(wxCommandEvent& event)
+{
+	auto* graphSettingsWindow = new GraphSettingsWindow(this, this->mathData);
+
+	graphSettingsWindow->Show(true);
+}
+
+void MainWindow::OnGraphFunctions(wxCommandEvent& event)
+{
+	auto* graphFunctionsWindow = new GraphFunctionsWindow(this, this->mathData);
+
+	graphFunctionsWindow->Show(true);
 }

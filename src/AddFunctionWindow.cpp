@@ -21,7 +21,7 @@ AddFunctionWindow::AddFunctionWindow(wxWindow* parent, MathData<double>* mathDat
 	parameterEntry(new wxTextCtrl(this, wxID_ANY)),
 	bodyEntry(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(250u, 300u), wxTE_MULTILINE))
 {
-	SetBackgroundColour(wxColor(192u, 197u, 206u));
+	SetBackgroundColour(wxColor(128u, 128u, 128u));
 
 	auto* sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -29,8 +29,7 @@ AddFunctionWindow::AddFunctionWindow(wxWindow* parent, MathData<double>* mathDat
 	auto* parameterText = new wxStaticText(this, wxID_ANY, "Parameters");
 	auto* bodyText = new wxStaticText(this, wxID_ANY, "Body");
 
-	auto& font = nameText->GetFont();
-	font.SetWeight(wxFONTWEIGHT_BOLD);
+	auto& font = wxFont(8u, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
 	nameText->SetFont(font);
 	parameterText->SetFont(font);

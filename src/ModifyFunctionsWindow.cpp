@@ -22,7 +22,7 @@ ModifyFunctionsWindow::ModifyFunctionsWindow(wxWindow* parent, MathData<double>*
 	parametersEntry(new wxTextCtrl(secondaryPanel, wxID_ANY)),
 	bodyEntry(new wxTextCtrl(secondaryPanel, wxID_ANY, "", wxDefaultPosition, wxSize(250u, 300u), wxTE_MULTILINE))
 {
-	SetBackgroundColour(wxColor(192u, 197u, 206u));
+	SetBackgroundColour(wxColor(128u, 128u, 128u));
 
 	secondaryPanel->Hide();
 	mainPanel->Show();
@@ -31,10 +31,7 @@ ModifyFunctionsWindow::ModifyFunctionsWindow(wxWindow* parent, MathData<double>*
 
 	auto* nameText = new wxStaticText(scrollPanel, wxID_ANY, "Name");
 
-	auto& font = nameText->GetFont();
-	font.SetWeight(wxFONTWEIGHT_BOLD);
-
-	nameText->SetFont(font);
+	nameText->SetFont(wxFont(12u, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD));
 
 	auto* topSizer = new wxBoxSizer(wxVERTICAL);
 
@@ -104,8 +101,7 @@ void ModifyFunctionsWindow::OnSelectFunction(wxMouseEvent& event)
 
 	this->secondaryPanel->SetSizer(bottomSizer);
 
-	auto& font = nameText->GetFont();
-	font.SetWeight(wxFONTWEIGHT_BOLD);
+	auto& font = wxFont(8u, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
 	nameText->SetFont(font);
 	parametersText->SetFont(font);

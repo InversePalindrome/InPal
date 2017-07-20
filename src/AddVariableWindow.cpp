@@ -18,7 +18,7 @@ AddVariableWindow::AddVariableWindow(wxWindow* parent, MathData<double>* mathDat
 	nameEntry(new wxTextCtrl(this, wxID_ANY)),
 	valueEntry(new wxTextCtrl(this, wxID_ANY))
 {
-	SetBackgroundColour(wxColor(192u, 197u, 206u));
+	SetBackgroundColour(wxColor(128u, 128u, 128u));
 
 	auto* topSizer = new wxBoxSizer(wxVERTICAL);
 	auto* gridSizer = new wxGridSizer(2u, 2u, 0u, 0u);
@@ -26,8 +26,7 @@ AddVariableWindow::AddVariableWindow(wxWindow* parent, MathData<double>* mathDat
 	auto* nameText = new wxStaticText(this, wxID_ANY, "Name");
 	auto* valueText = new wxStaticText(this, wxID_ANY, "Value");
 
-	auto& font = nameText->GetFont();
-	font.SetWeight(wxFONTWEIGHT_BOLD);
+	auto& font = wxFont(8u, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
 	nameText->SetFont(font);
 	valueText->SetFont(font);
