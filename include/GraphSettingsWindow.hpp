@@ -10,7 +10,9 @@ InversePalindrome.com
 #include "MathData.hpp"
 
 #include <wx/minifram.h>
+#include <wx/stattext.h>
 #include <wx/textctrl.h>
+#include <wx/choice.h>
 
 
 class GraphSettingsWindow : public wxMiniFrame
@@ -23,6 +25,7 @@ private:
 
 	wxTextCtrl* minXEntry;
 	wxTextCtrl* maxXEntry;
+	wxChoice* typeChoice;
 
 	void OnUpdate(wxMouseEvent& event);
 };

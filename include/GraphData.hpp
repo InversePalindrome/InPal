@@ -1,6 +1,6 @@
 /*
 Copyright (c) 2017 InversePalindrome
-InPal - GraphData.cpp
+InPal - GraphData.hpp
 InversePalindrome.com
 */
 
@@ -9,10 +9,13 @@ InversePalindrome.com
 
 #include <wx/mathplot.h>
 
+#include <string>
+
 
 struct GraphData
 {
 	mpWindow* plotWindow;
+	std::string graphType;
 	std::vector<mpFXYVector*> graphs;
 
 	double minX;
