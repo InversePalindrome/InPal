@@ -12,6 +12,8 @@ InversePalindrome.com
 #include "LCM.hpp"
 #include "PrimeTest.hpp"
 
+#include <boost/math/constants/constants.hpp>
+
 #include <iostream>
 
 
@@ -29,6 +31,12 @@ public:
 
 	T getVariable(const std::string& variableName);
 	std::string getStringVariable(const std::string& variableName);
+
+	T getDerivative(T& variable);
+	T getSecondDerivative(T& variable);
+	T getThirdDerivative(T& variable);
+
+	T getIntegral(T& variable, T initialX, T finalX);
 
 	void setTask(const std::string& task);
 
@@ -129,6 +137,30 @@ std::string MathSolver<T>::getStringVariable(const std::string& variableName)
 }
 
 template<typename T>
+T MathSolver<T>::getDerivative(T& variable)
+{
+	return exprtk::derivative(this->expression, variable);
+}
+
+template<typename T>
+T MathSolver<T>::getSecondDerivative(T& variable)
+{
+	return exprtk::second_derivative(this->expression, variable);
+}
+
+template<typename T>
+T MathSolver<T>::getThirdDerivative(T& variable)
+{
+	return exprtk::third_derivative(this->expression, variable);
+}
+
+template<typename T>
+T MathSolver<T>::getIntegral(T& variable, T initialX, T finalX)
+{
+	return exprtk::integrate(this->expression, variable, initialX, finalX);
+}
+
+template<typename T>
 void MathSolver<T>::setTask(const std::string& task)
 {
 	this->task = task;
@@ -205,7 +237,7 @@ template<typename T>
 void MathSolver<T>::loadConstants()
 {
 	this->symbolTable.add_constants();
-	this->symbolTable.add_constant("e", 2.7182818284590452353602874713527);
+	this->symbolTable.add_constant("e", boost::math::constants::e<double>());
 }
 
 template<typename T>
