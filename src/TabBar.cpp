@@ -7,6 +7,7 @@ InversePalindrome.com
 
 #include "TabBar.hpp"
 #include "GrapherPanel.hpp"
+#include "CalculusPanel.hpp"
 #include "CalculatorPanel.hpp"
 
 
@@ -15,4 +16,5 @@ TabBar::TabBar(wxWindow* parent, MathData<double>* mathData) :
 {
 	AddPage(new CalculatorPanel(this, mathData), "Calculator");
 	AddPage(new GrapherPanel(this, mathData), "Grapher");
+	AddPage(new CalculusPanel(this, mathData), "Calculus");
 }

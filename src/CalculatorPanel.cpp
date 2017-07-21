@@ -52,7 +52,7 @@ CalculatorPanel::CalculatorPanel(wxWindow* parent, MathData<double>* mathData) :
 
 void CalculatorPanel::OnSolveTask(wxMouseEvent& event)
 {
-	this->mathData->mathSolver.setTask(taskEntry->GetValue().ToStdString());
+	this->mathData->mathSolver.setTask(this->taskEntry->GetValue().ToStdString());
 
 	if (this->mathData->mathSolver.solve())
 	{
