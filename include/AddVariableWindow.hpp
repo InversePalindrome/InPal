@@ -16,10 +16,10 @@ InversePalindrome.com
 class AddVariableWindow : public wxMiniFrame
 {
 public:
-	AddVariableWindow(wxWindow* parent, MathData<double>* mathData);
+	AddVariableWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	wxTextCtrl* nameEntry;
 	wxTextCtrl* valueEntry;

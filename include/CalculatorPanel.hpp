@@ -17,10 +17,10 @@ InversePalindrome.com
 class CalculatorPanel : public wxPanel
 {
 public:
-	CalculatorPanel(wxWindow* parent, MathData<double>* mathData);
+	CalculatorPanel(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	wxTextCtrl* taskEntry;
 	wxTextCtrl* taskSolution;

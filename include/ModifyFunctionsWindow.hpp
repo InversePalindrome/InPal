@@ -20,10 +20,10 @@ InversePalindrome.com
 class ModifyFunctionsWindow : public wxMiniFrame
 {
 public:
-	ModifyFunctionsWindow(wxWindow* parent, MathData<double>* mathData);
+	ModifyFunctionsWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	wxPanel* mainPanel;
 	wxPanel* secondaryPanel;

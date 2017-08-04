@@ -23,3 +23,5 @@ struct MathData
 	std::unordered_map<std::string, T> constants;
 	std::unordered_map<std::string, std::pair<std::string, std::string>> functions;
 };
+
+using MathDataDefault = MathData<long double>;

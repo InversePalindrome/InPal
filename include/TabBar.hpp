@@ -15,5 +15,5 @@ InversePalindrome.com
 class TabBar : public wxNotebook
 {
 public:
-	TabBar(wxWindow* parent, MathData<double>* mathData);
+	TabBar(wxWindow* parent, MathDataDefault* mathData);
 };

@@ -20,7 +20,7 @@ public:
 	virtual int OnExit() override;
 
 private:
-	MathData<double> mathData;
+	MathDataDefault mathData;
 
 	void loadData();
 	void saveData();

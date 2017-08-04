@@ -22,10 +22,10 @@ InversePalindrome.com
 class GraphFunctionsWindow : public wxMiniFrame
 {
 public:
-	GraphFunctionsWindow(wxWindow* parent, MathData<double>* mathData);
+	GraphFunctionsWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	std::unordered_map<std::size_t, std::tuple<wxStaticText*, wxChoice*, wxButton*>> functionWidgets;
 

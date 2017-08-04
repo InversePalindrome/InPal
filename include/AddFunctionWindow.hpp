@@ -16,10 +16,10 @@ InversePalindrome.com
 class AddFunctionWindow : public wxMiniFrame
 {
 public:
-	AddFunctionWindow(wxWindow* parent, MathData<double>* mathData);
+	AddFunctionWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	wxTextCtrl* nameEntry;
 	wxTextCtrl* parameterEntry;

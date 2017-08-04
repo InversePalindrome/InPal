@@ -18,12 +18,12 @@ InversePalindrome.com
 class GrapherPanel : public wxPanel
 {
 public:
-	GrapherPanel(wxWindow* parent, MathData<double>* mathData);
+	GrapherPanel(wxWindow* parent, MathDataDefault* mathData);
 
 	void OnUpdateGraphType(wxCommandEvent& event);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	wxStaticText* graphText;
 	wxTextCtrl* graphEntry;

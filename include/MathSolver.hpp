@@ -237,7 +237,7 @@ template<typename T>
 void MathSolver<T>::loadConstants()
 {
 	this->symbolTable.add_constants();
-	this->symbolTable.add_constant("e", boost::math::constants::e<double>());
+	this->symbolTable.add_constant("e", boost::math::constants::e<long double>());
 }
 
 template<typename T>

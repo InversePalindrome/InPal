@@ -16,10 +16,10 @@ InversePalindrome.com
 class MainWindow : public wxFrame
 {
 public:
-	MainWindow(const std::string& title, MathData<double>* mathData);
+	MainWindow(const std::string& title, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	void OnAddVariable(wxCommandEvent& event);
 	void OnAddConstant(wxCommandEvent& event);

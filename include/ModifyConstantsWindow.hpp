@@ -20,10 +20,10 @@ InversePalindrome.com
 class ModifyConstantsWindow : public wxMiniFrame
 {
 public:
-	ModifyConstantsWindow(wxWindow* parent, MathData<double>* mathData);
+	ModifyConstantsWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	wxGridSizer* gridSizer;
 

@@ -18,10 +18,10 @@ InversePalindrome.com
 class GraphSettingsWindow : public wxMiniFrame
 {
 public:
-	GraphSettingsWindow(wxWindow* parent, MathData<double>* mathData);
+	GraphSettingsWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	wxTextCtrl* minXEntry;
 	wxTextCtrl* maxXEntry;

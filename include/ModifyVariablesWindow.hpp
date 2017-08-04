@@ -20,10 +20,10 @@ InversePalindrome.com
 class ModifyVariablesWindow : public wxMiniFrame
 {
 public:
-	ModifyVariablesWindow(wxWindow* parent, MathData<double>* mathData);
+	ModifyVariablesWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathData<double>* mathData;
+	MathDataDefault* mathData;
 
 	wxGridSizer* gridSizer;
 
