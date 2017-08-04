@@ -11,7 +11,7 @@ InversePalindrome.com
 #include "CalculatorPanel.hpp"
 
 
-TabBar::TabBar(wxWindow* parent, MathData<double>* mathData) :
+TabBar::TabBar(wxWindow* parent, MathDataDefault* mathData) :
 	wxNotebook(parent, wxID_ANY)
 {
 	AddPage(new CalculatorPanel(this, mathData), "Calculator");

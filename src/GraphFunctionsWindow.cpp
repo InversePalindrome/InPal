@@ -13,7 +13,7 @@ InversePalindrome.com
 #include <algorithm>
 
 
-GraphFunctionsWindow::GraphFunctionsWindow(wxWindow* parent, MathData<double>* mathData) :
+GraphFunctionsWindow::GraphFunctionsWindow(wxWindow* parent, MathDataDefault* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Graph Functions", wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
 	functionWidgets()

@@ -12,7 +12,7 @@ InversePalindrome.com
 #include <wx/button.h>
 
 
-GraphSettingsWindow::GraphSettingsWindow(wxWindow* parent, MathData<double>* mathData) :
+GraphSettingsWindow::GraphSettingsWindow(wxWindow* parent, MathDataDefault* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Graph Settings", wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
 	minXEntry(new wxTextCtrl(this, wxID_ANY, std::to_string(this->mathData->graphData.minX))),

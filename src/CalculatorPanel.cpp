@@ -10,9 +10,10 @@ InversePalindrome.com
 #include <wx/sizer.h>
 
 #include <boost/format.hpp>
+#include <boost/algorithm/string/trim.hpp>
 
 
-CalculatorPanel::CalculatorPanel(wxWindow* parent, MathData<double>* mathData) :
+CalculatorPanel::CalculatorPanel(wxWindow* parent, MathDataDefault* mathData) :
 	wxPanel(parent, wxID_ANY),
 	mathData(mathData),
 	taskEntry(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(700u, 600u), wxTE_MULTILINE)),
@@ -56,7 +57,11 @@ void CalculatorPanel::OnSolveTask(wxMouseEvent& event)
 
 	if (this->mathData->mathSolver.solve())
 	{
-		this->taskSolution->SetValue(boost::str(boost::format("%.12f") % this->mathData->mathSolver.getValue()));
+		auto& result = boost::str(boost::format("%.18f") % this->mathData->mathSolver.getValue());
+		boost::trim_right_if(result, boost::is_any_of("0"));
+		boost::trim_right_if(result, boost::is_any_of("."));
+
+		this->taskSolution->SetValue(result);
 	}
 	else
 	{

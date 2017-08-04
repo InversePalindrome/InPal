@@ -12,7 +12,7 @@ InversePalindrome.com
 #include <wx/stattext.h>
 
 
-AddConstantWindow::AddConstantWindow(wxWindow* parent, MathData<double>* mathData) :
+AddConstantWindow::AddConstantWindow(wxWindow* parent, MathDataDefault* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Add Constant", wxDefaultPosition, wxSize(250u, 200u), wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
 	nameEntry(new wxTextCtrl(this, wxID_ANY)),
@@ -54,15 +54,15 @@ void AddConstantWindow::OnAddConstant(wxMouseEvent& event)
 {
 	const auto& constantName = this->nameEntry->GetValue().ToStdString();
 
-	double value;
+	long double value;
 
 	try
 	{
-		value = std::stod(this->valueEntry->GetValue().ToStdString());
+		value = std::stold(this->valueEntry->GetValue().ToStdString());
 	}
 	catch (const std::invalid_argument& e)
 	{
-		value = std::numeric_limits<double>::quiet_NaN();
+		value = std::numeric_limits<long double>::quiet_NaN();
 	}
 
 	if (!constantName.empty())

@@ -12,10 +12,11 @@ InversePalindrome.com
 #include <wx/stattext.h>
 
 #include <boost/format.hpp>
+#include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/replace.hpp>
 
 
-CalculusPanel::CalculusPanel(wxWindow* parent, MathData<double>* mathData) :
+CalculusPanel::CalculusPanel(wxWindow* parent, MathDataDefault* mathData) :
 	wxPanel(parent, wxID_ANY),
 	mathData(mathData),
 	derivativeChoice(),
@@ -118,10 +119,10 @@ void CalculusPanel::OnSolveDerivative(wxMouseEvent& event)
 
 	this->mathData->mathSolver.setTask(functionEquation);
 	
-	double derivativeVariable;
+	long double derivativeVariable;
 	try
 	{
-		derivativeVariable = std::stod(this->xPositionEntry->GetValue().ToStdString());
+		derivativeVariable = std::stold(this->xPositionEntry->GetValue().ToStdString());
 	}
 	catch (const std::invalid_argument& e)
 	{
@@ -132,18 +133,28 @@ void CalculusPanel::OnSolveDerivative(wxMouseEvent& event)
 
 	if (this->mathData->mathSolver.solve())
 	{
+		long double derivative;
+
 		if (this->derivativeChoice->GetStringSelection() == "First Derivative")
 		{
-			this->derivativeSolution->SetValue(boost::str(boost::format("%.12f") % this->mathData->mathSolver.getDerivative(derivativeVariable)));
+			derivative = this->mathData->mathSolver.getDerivative(derivativeVariable);
 		}
 		else if (this->derivativeChoice->GetStringSelection() == "Second Derivative")
 		{
-			this->derivativeSolution->SetValue(boost::str(boost::format("%.12f") % this->mathData->mathSolver.getSecondDerivative(derivativeVariable)));
+			derivative = this->mathData->mathSolver.getSecondDerivative(derivativeVariable);
 		}
 		else if (this->derivativeChoice->GetStringSelection() == "Third Derivative")
 		{
-			this->derivativeSolution->SetValue(boost::str(boost::format("%.12f") % this->mathData->mathSolver.getThirdDerivative(derivativeVariable)));
+			derivative = this->mathData->mathSolver.getThirdDerivative(derivativeVariable);
 		}
+
+		auto& result = boost::str(boost::format("%.18f") %
+			derivative);
+
+		boost::trim_right_if(result, boost::is_any_of("0"));
+		boost::trim_right_if(result, boost::is_any_of("."));
+
+		this->derivativeSolution->SetValue(result);
 	}
 }
 
@@ -155,16 +166,16 @@ void CalculusPanel::OnSolveIntegral(wxMouseEvent& event)
 
 	this->mathData->mathSolver.setTask(functionEquation);
 
-	double integralVariable = 0.0;
-	double initialX;
-	double finalX;
+	long double integralVariable = 0.0;
+	long double initialX;
+	long double finalX;
 
 	this->mathData->mathSolver.addVariable("integralVariable", integralVariable);
 
 	try
 	{
-		initialX = std::stod(this->initialXEntry->GetValue().ToStdString());
-		finalX = std::stod(this->finalXEntry->GetValue().ToStdString());
+		initialX = std::stold(this->initialXEntry->GetValue().ToStdString());
+		finalX = std::stold(this->finalXEntry->GetValue().ToStdString());
 	}
 	catch (const std::invalid_argument& e)
 	{
@@ -174,8 +185,12 @@ void CalculusPanel::OnSolveIntegral(wxMouseEvent& event)
 
 	if (this->mathData->mathSolver.solve())
 	{
-		this->integralSolution->SetValue(boost::str(boost::format("%.12f") % 
-			this->mathData->mathSolver.getIntegral(integralVariable, initialX, finalX)));
+		auto& result = boost::str(boost::format("%.18f") % 
+			this->mathData->mathSolver.getIntegral(integralVariable, initialX, finalX));
+		boost::trim_right_if(result, boost::is_any_of("0"));
+		boost::trim_right_if(result, boost::is_any_of("."));
+
+		this->integralSolution->SetValue(result);
 	}
 }
 

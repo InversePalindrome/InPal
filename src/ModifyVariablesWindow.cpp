@@ -11,7 +11,7 @@ InversePalindrome.com
 #include <wx/scrolwin.h>
 
 
-ModifyVariablesWindow::ModifyVariablesWindow(wxWindow* parent, MathData<double>* mathData) :
+ModifyVariablesWindow::ModifyVariablesWindow(wxWindow* parent, MathDataDefault* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Modify Variables", wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
 	gridSizer(new wxGridSizer(mathData->variables.size(), 3u, 0u, 0u)),
@@ -74,15 +74,15 @@ void ModifyVariablesWindow::OnModifyVariable(wxMouseEvent& event)
 {
 	for (auto& widgetGroup : this->variableWidgets)
 	{
-		double value;
+		long double value;
 
 		try
 		{
-			value = std::stod(std::get<1>(widgetGroup.second)->GetValue().ToStdString());
+			value = std::stold(std::get<1>(widgetGroup.second)->GetValue().ToStdString());
 		}
 		catch (const std::invalid_argument& e)
 		{
-			value = std::numeric_limits<double>::quiet_NaN();
+			value = std::numeric_limits<long double>::quiet_NaN();
 		}
 
 		this->mathData->variables.at(std::get<0>(widgetGroup.second)->GetLabel().ToStdString()) = value;

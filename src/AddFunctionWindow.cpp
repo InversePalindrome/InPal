@@ -14,7 +14,7 @@ InversePalindrome.com
 #include <boost/algorithm/string.hpp>
 
 
-AddFunctionWindow::AddFunctionWindow(wxWindow* parent, MathData<double>* mathData) :
+AddFunctionWindow::AddFunctionWindow(wxWindow* parent, MathDataDefault* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Add Function", wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
 	nameEntry(new wxTextCtrl(this, wxID_ANY)),

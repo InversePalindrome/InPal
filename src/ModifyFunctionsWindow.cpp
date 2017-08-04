@@ -12,7 +12,7 @@ InversePalindrome.com
 #include <boost/algorithm/string.hpp>
 
 
-ModifyFunctionsWindow::ModifyFunctionsWindow(wxWindow* parent, MathData<double>* mathData) :
+ModifyFunctionsWindow::ModifyFunctionsWindow(wxWindow* parent, MathDataDefault* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Modify Functions", wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
 	mainPanel(new wxPanel(this)),

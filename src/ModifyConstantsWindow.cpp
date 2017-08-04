@@ -13,7 +13,7 @@ InversePalindrome.com
 #include <limits>
 
 
-ModifyConstantsWindow::ModifyConstantsWindow(wxWindow* parent, MathData<double>* mathData) :
+ModifyConstantsWindow::ModifyConstantsWindow(wxWindow* parent, MathDataDefault* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Modify Constants", wxDefaultPosition, wxDefaultSize, wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
 	gridSizer(new wxGridSizer(mathData->constants.size(), 3u, 0u, 0u)),
@@ -78,15 +78,15 @@ void ModifyConstantsWindow::OnModifyConstant(wxMouseEvent& event)
 	{
 		this->mathData->mathSolver.removeVariable(std::get<0>(widgetGroup.second)->GetLabel().ToStdString());
 
-		double value;
+		long double value;
 
 		try
 		{
-			value = std::stod(std::get<1>(widgetGroup.second)->GetValue().ToStdString());
+			value = std::stold(std::get<1>(widgetGroup.second)->GetValue().ToStdString());
 		}
 		catch (const std::invalid_argument& e)
 		{
-			value = std::numeric_limits<double>::quiet_NaN();
+			value = std::numeric_limits<long double>::quiet_NaN();
 		}
 
 		this->mathData->constants.at(std::get<0>(widgetGroup.second)->GetLabel().ToStdString()) = value;

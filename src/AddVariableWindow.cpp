@@ -12,7 +12,7 @@ InversePalindrome.com
 #include <wx/stattext.h>
 
 
-AddVariableWindow::AddVariableWindow(wxWindow* parent, MathData<double>* mathData) :
+AddVariableWindow::AddVariableWindow(wxWindow* parent, MathDataDefault* mathData) :
 	wxMiniFrame(parent, wxID_ANY, "Add Variable", wxDefaultPosition, wxSize(250u, 200u), wxCAPTION | wxCLOSE_BOX),
 	mathData(mathData),
 	nameEntry(new wxTextCtrl(this, wxID_ANY)),
@@ -54,15 +54,15 @@ void AddVariableWindow::OnAddVariable(wxMouseEvent& event)
 {
 	const auto& variableName = this->nameEntry->GetValue().ToStdString();
 
-	double value;
+	long double value;
 
 	try
 	{
-		value = std::stod(this->valueEntry->GetValue().ToStdString());
+		value = std::stold(this->valueEntry->GetValue().ToStdString());
 	}
 	catch (const std::invalid_argument& e)
 	{
-		value = std::numeric_limits<double>::quiet_NaN();
+		value = std::numeric_limits<long double>::quiet_NaN();
 	}
 
 	if (!variableName.empty())

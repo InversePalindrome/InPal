@@ -9,7 +9,7 @@ InversePalindrome.com
 #include "MainWindow.hpp"
 
 
-SplashScreen::SplashScreen(const wxBitmap& bitmap, std::size_t activeTime, MathData<double>* mathData) :
+SplashScreen::SplashScreen(const wxBitmap& bitmap, std::size_t activeTime, MathDataDefault* mathData) :
 	wxSplashScreen(bitmap, wxSPLASH_TIMEOUT | wxSPLASH_CENTRE_ON_SCREEN, activeTime, nullptr, wxID_ANY, wxDefaultPosition, wxSize(720u, 640u), wxDEFAULT_FRAME_STYLE),
 	mathData(mathData)
 {

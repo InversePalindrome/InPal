@@ -17,7 +17,7 @@ InversePalindrome.com
 #include <algorithm>
 
 
-GrapherPanel::GrapherPanel(wxWindow* parent, MathData<double>* mathData) :
+GrapherPanel::GrapherPanel(wxWindow* parent, MathDataDefault* mathData) :
 	wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, "GrapherPanel"),
 	mathData(mathData),
 	graphText(new wxStaticText(this, wxID_ANY, "F(x) = ")),

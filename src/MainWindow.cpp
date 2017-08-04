@@ -17,7 +17,7 @@ InversePalindrome.com
 #include "GraphFunctionsWindow.hpp"
 
 
-MainWindow::MainWindow(const std::string& title, MathData<double>* mathData) :
+MainWindow::MainWindow(const std::string& title, MathDataDefault* mathData) :
 	wxFrame(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(720u, 640u)),
 	mathData(mathData)
 {
