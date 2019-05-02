@@ -18,19 +18,19 @@ InversePalindrome.com
 class GrapherPanel : public wxPanel
 {
 public:
-	GrapherPanel(wxWindow* parent, MathDataDefault* mathData);
+    GrapherPanel(wxWindow* parent, MathDataDefault* mathData);
 
-	void OnUpdateGraphType(wxCommandEvent& event);
+    void OnUpdateGraphType(wxCommandEvent& event);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	wxStaticText* graphText;
-	wxTextCtrl* graphEntry;
+    wxStaticText* graphText;
+    wxTextCtrl* graphEntry;
 
-	void graphCartesian(std::vector<double>& xCoordinates, std::vector<double>& yCoordinates,
-		std::size_t numberOfPoints, double minX, double maxX);
-	void graphPolar(std::vector<double>& xCoordinates, std::vector<double>& yCoordinates, std::size_t numberOfPoints);
+    void graphCartesian(std::vector<double>& xCoordinates, std::vector<double>& yCoordinates,
+        std::size_t numberOfPoints, double minX, double maxX);
+    void graphPolar(std::vector<double>& xCoordinates, std::vector<double>& yCoordinates, std::size_t numberOfPoints);
 
-	void OnGraphButton(wxMouseEvent& event);
+    void OnGraphButton(wxMouseEvent& event);
 };

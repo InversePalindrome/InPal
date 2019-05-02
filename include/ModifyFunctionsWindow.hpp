@@ -20,20 +20,20 @@ InversePalindrome.com
 class ModifyFunctionsWindow : public wxMiniFrame
 {
 public:
-	ModifyFunctionsWindow(wxWindow* parent, MathDataDefault* mathData);
+    ModifyFunctionsWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	wxPanel* mainPanel;
-	wxPanel* secondaryPanel;
-	wxBoxSizer* mainSizer;
+    wxPanel* mainPanel;
+    wxPanel* secondaryPanel;
+    wxBoxSizer* mainSizer;
 
-	wxStaticText* functionName;
-	wxTextCtrl* parametersEntry;
-	wxTextCtrl* bodyEntry;
+    wxStaticText* functionName;
+    wxTextCtrl* parametersEntry;
+    wxTextCtrl* bodyEntry;
 
-	void OnSelectFunction(wxMouseEvent& event);
-	void OnModifyFunction(wxMouseEvent& event);
-	void OnDeleteFunction(wxMouseEvent& event);
+    void OnSelectFunction(wxMouseEvent& event);
+    void OnModifyFunction(wxMouseEvent& event);
+    void OnDeleteFunction(wxMouseEvent& event);
 };

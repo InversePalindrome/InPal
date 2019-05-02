@@ -14,67 +14,67 @@ InversePalindrome.com
 
 
 CalculatorPanel::CalculatorPanel(wxWindow* parent, MathDataDefault* mathData) :
-	wxPanel(parent, wxID_ANY),
-	mathData(mathData),
-	taskEntry(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(700u, 600u), wxTE_MULTILINE)),
-	taskSolution(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(700u, 50u), wxTE_READONLY)),
-	solveButton(new wxButton(this, wxID_ANY, "Solve")),
-	clearButton(new wxButton(this, wxID_ANY, "Clear"))
+    wxPanel(parent, wxID_ANY),
+    mathData(mathData),
+    taskEntry(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(700u, 600u), wxTE_MULTILINE)),
+    taskSolution(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxSize(700u, 50u), wxTE_READONLY)),
+    solveButton(new wxButton(this, wxID_ANY, "Solve")),
+    clearButton(new wxButton(this, wxID_ANY, "Clear"))
 {
-	SetBackgroundColour(wxColor(128u, 128u, 128u));
+    SetBackgroundColour(wxColor(128u, 128u, 128u));
 
-	auto* topSizer = new wxBoxSizer(wxVERTICAL);
-	auto* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
-	
-	topSizer->Add(taskSolution, 0u, wxEXPAND | wxALL, 10u);
-	topSizer->AddSpacer(20u);
+    auto* topSizer = new wxBoxSizer(wxVERTICAL);
+    auto* buttonSizer = new wxBoxSizer(wxHORIZONTAL);
 
-	buttonSizer->Add(solveButton, 0u, wxALIGN_CENTER);
-	buttonSizer->AddSpacer(5u);
-	buttonSizer->Add(clearButton, 0u, wxALIGN_CENTER);
+    topSizer->Add(taskSolution, 0u, wxEXPAND | wxALL, 10u);
+    topSizer->AddSpacer(20u);
 
-	topSizer->Add(buttonSizer, 0u, wxALIGN_TOP | wxALIGN_CENTER_HORIZONTAL);
+    buttonSizer->Add(solveButton, 0u, wxALIGN_CENTER);
+    buttonSizer->AddSpacer(5u);
+    buttonSizer->Add(clearButton, 0u, wxALIGN_CENTER);
 
-	topSizer->AddSpacer(10u);
+    topSizer->Add(buttonSizer, 0u, wxALIGN_TOP | wxALIGN_CENTER_HORIZONTAL);
 
-	topSizer->Add(taskEntry, 0u, wxEXPAND | wxALL, 10u);
+    topSizer->AddSpacer(10u);
 
-	topSizer->Fit(this);
-	topSizer->SetSizeHints(this);
+    topSizer->Add(taskEntry, 0u, wxEXPAND | wxALL, 10u);
 
-	SetSizer(topSizer);
-	
-	taskSolution->SetFont(wxFont(30u, wxFontFamily::wxFONTFAMILY_DEFAULT, wxFontStyle::wxFONTSTYLE_NORMAL, wxFontWeight::wxFONTWEIGHT_BOLD));
-	taskEntry->SetFont(wxFont(18u, wxFontFamily::wxFONTFAMILY_DEFAULT, wxFontStyle::wxFONTSTYLE_NORMAL, wxFontWeight::wxFONTWEIGHT_BOLD));
+    topSizer->Fit(this);
+    topSizer->SetSizeHints(this);
 
-	solveButton->Bind(wxEVT_LEFT_DOWN, &CalculatorPanel::OnSolveTask, this);
-	clearButton->Bind(wxEVT_LEFT_DOWN, &CalculatorPanel::OnClearTask, this);
+    SetSizer(topSizer);
+
+    taskSolution->SetFont(wxFont(30u, wxFontFamily::wxFONTFAMILY_DEFAULT, wxFontStyle::wxFONTSTYLE_NORMAL, wxFontWeight::wxFONTWEIGHT_BOLD));
+    taskEntry->SetFont(wxFont(18u, wxFontFamily::wxFONTFAMILY_DEFAULT, wxFontStyle::wxFONTSTYLE_NORMAL, wxFontWeight::wxFONTWEIGHT_BOLD));
+
+    solveButton->Bind(wxEVT_LEFT_DOWN, &CalculatorPanel::OnSolveTask, this);
+    clearButton->Bind(wxEVT_LEFT_DOWN, &CalculatorPanel::OnClearTask, this);
 }
 
-void CalculatorPanel::OnSolveTask(wxMouseEvent& event)
+void CalculatorPanel::OnSolveTask(wxMouseEvent & event)
 {
-	this->mathData->mathSolver.setTask(this->taskEntry->GetValue().ToStdString());
+    this->mathData->mathSolver.setTask(this->taskEntry->GetValue().ToStdString());
 
-	if (this->mathData->mathSolver.solve())
-	{
-		auto& result = boost::str(boost::format("%.18f") % this->mathData->mathSolver.getValue());
-		boost::trim_right_if(result, boost::is_any_of("0"));
-		boost::trim_right_if(result, boost::is_any_of("."));
+    if (this->mathData->mathSolver.solve())
+    {
+        auto& result = boost::str(boost::format("%.18f") % this->mathData->mathSolver.getValue());
+        boost::trim_right_if(result, boost::is_any_of("0"));
+        boost::trim_right_if(result, boost::is_any_of("."));
 
-		this->taskSolution->SetValue(result);
-	}
-	else
-	{
-		this->taskSolution->SetValue("nan");
-	}
+        this->taskSolution->SetValue(result);
+    }
+    else
+    {
+        this->taskSolution->SetValue("nan");
+    }
 }
 
-void CalculatorPanel::OnClearTask(wxMouseEvent& event)
+void CalculatorPanel::OnClearTask(wxMouseEvent & event)
 {
-	this->mathData->mathSolver.clearTask();
+    this->mathData->mathSolver.clearTask();
 
-	this->taskEntry->Clear();
-	this->taskSolution->Clear();
+    this->taskEntry->Clear();
+    this->taskSolution->Clear();
 }
 
 

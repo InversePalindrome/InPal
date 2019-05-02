@@ -16,19 +16,19 @@ InversePalindrome.com
 class MainWindow : public wxFrame
 {
 public:
-	MainWindow(const std::string& title, MathDataDefault* mathData);
+    MainWindow(const std::string& title, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	void OnAddVariable(wxCommandEvent& event);
-	void OnAddConstant(wxCommandEvent& event);
-	void OnAddFunction(wxCommandEvent& event);
+    void OnAddVariable(wxCommandEvent& event);
+    void OnAddConstant(wxCommandEvent& event);
+    void OnAddFunction(wxCommandEvent& event);
 
-	void OnModifyVariables(wxCommandEvent& event);
-	void OnModifyConstants(wxCommandEvent& event);
-	void OnModifyFunctions(wxCommandEvent& event);
+    void OnModifyVariables(wxCommandEvent& event);
+    void OnModifyConstants(wxCommandEvent& event);
+    void OnModifyFunctions(wxCommandEvent& event);
 
-	void OnGraphSettings(wxCommandEvent& event);
-	void OnGraphFunctions(wxCommandEvent& event);
+    void OnGraphSettings(wxCommandEvent& event);
+    void OnGraphFunctions(wxCommandEvent& event);
 };

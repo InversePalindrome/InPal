@@ -16,12 +16,12 @@ InversePalindrome.com
 template<typename T>
 struct MathData
 {
-	MathSolver<T> mathSolver;
-	GraphData graphData;
+    MathSolver<T> mathSolver;
+    GraphData graphData;
 
-	std::unordered_map<std::string, T> variables;
-	std::unordered_map<std::string, T> constants;
-	std::unordered_map<std::string, std::pair<std::string, std::string>> functions;
+    std::unordered_map<std::string, T> variables;
+    std::unordered_map<std::string, T> constants;
+    std::unordered_map<std::string, std::pair<std::string, std::string>> functions;
 };
 
 using MathDataDefault = MathData<long double>;

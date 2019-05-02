@@ -16,14 +16,14 @@ InversePalindrome.com
 class Application : public wxApp
 {
 public:
-	virtual bool OnInit() override;
-	virtual int OnExit() override;
+    virtual bool OnInit() override;
+    virtual int OnExit() override;
 
 private:
-	MathDataDefault mathData;
+    MathDataDefault mathData;
 
-	void loadData();
-	void saveData();
+    void loadData();
+    void saveData();
 };
 
 wxIMPLEMENT_APP(Application);

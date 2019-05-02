@@ -22,13 +22,13 @@ InversePalindrome.com
 class GraphFunctionsWindow : public wxMiniFrame
 {
 public:
-	GraphFunctionsWindow(wxWindow* parent, MathDataDefault* mathData);
+    GraphFunctionsWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	std::unordered_map<std::size_t, std::tuple<wxStaticText*, wxChoice*, wxButton*>> functionWidgets;
+    std::unordered_map<std::size_t, std::tuple<wxStaticText*, wxChoice*, wxButton*>> functionWidgets;
 
-	void OnDeleteFunction(wxMouseEvent& event);
-	void OnSelectColor(wxCommandEvent& event);
+    void OnDeleteFunction(wxMouseEvent& event);
+    void OnSelectColor(wxCommandEvent& event);
 };

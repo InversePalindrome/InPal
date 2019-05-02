@@ -12,9 +12,9 @@ InversePalindrome.com
 
 
 TabBar::TabBar(wxWindow* parent, MathDataDefault* mathData) :
-	wxNotebook(parent, wxID_ANY)
+    wxNotebook(parent, wxID_ANY)
 {
-	AddPage(new CalculatorPanel(this, mathData), "Calculator");
-	AddPage(new GrapherPanel(this, mathData), "Grapher");
-	AddPage(new CalculusPanel(this, mathData), "Calculus");
+    AddPage(new CalculatorPanel(this, mathData), "Calculator");
+    AddPage(new GrapherPanel(this, mathData), "Grapher");
+    AddPage(new CalculusPanel(this, mathData), "Calculus");
 }

@@ -18,14 +18,14 @@ InversePalindrome.com
 class GraphSettingsWindow : public wxMiniFrame
 {
 public:
-	GraphSettingsWindow(wxWindow* parent, MathDataDefault* mathData);
+    GraphSettingsWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	wxTextCtrl* minXEntry;
-	wxTextCtrl* maxXEntry;
-	wxChoice* typeChoice;
+    wxTextCtrl* minXEntry;
+    wxTextCtrl* maxXEntry;
+    wxChoice* typeChoice;
 
-	void OnUpdate(wxMouseEvent& event);
+    void OnUpdate(wxMouseEvent& event);
 };

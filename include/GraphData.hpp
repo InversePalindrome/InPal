@@ -14,10 +14,10 @@ InversePalindrome.com
 
 struct GraphData
 {
-	mpWindow* plotWindow;
-	std::string graphType;
-	std::vector<mpFXYVector*> graphs;
+    mpWindow* plotWindow;
+    std::string graphType;
+    std::vector<mpFXYVector*> graphs;
 
-	double minX;
-	double maxX;
+    double minX;
+    double maxX;
 };

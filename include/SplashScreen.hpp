@@ -15,10 +15,10 @@ InversePalindrome.com
 class SplashScreen : public wxSplashScreen
 {
 public:
-	SplashScreen(const wxBitmap& bitmap, std::size_t activeTime, MathDataDefault* mathData);
+    SplashScreen(const wxBitmap& bitmap, std::size_t activeTime, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	void OnCloseWindow(wxCloseEvent& event);
+    void OnCloseWindow(wxCloseEvent& event);
 };

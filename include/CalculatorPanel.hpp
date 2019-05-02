@@ -17,16 +17,16 @@ InversePalindrome.com
 class CalculatorPanel : public wxPanel
 {
 public:
-	CalculatorPanel(wxWindow* parent, MathDataDefault* mathData);
+    CalculatorPanel(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	wxTextCtrl* taskEntry;
-	wxTextCtrl* taskSolution;
-	wxButton* solveButton;
-	wxButton* clearButton;
+    wxTextCtrl* taskEntry;
+    wxTextCtrl* taskSolution;
+    wxButton* solveButton;
+    wxButton* clearButton;
 
-	void OnSolveTask(wxMouseEvent& event);
-	void OnClearTask(wxMouseEvent& event);
+    void OnSolveTask(wxMouseEvent& event);
+    void OnClearTask(wxMouseEvent& event);
 };

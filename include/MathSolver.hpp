@@ -21,229 +21,229 @@ template<typename T>
 class MathSolver
 {
 public:
-	MathSolver();
-	MathSolver(const std::string& task);
+    MathSolver();
+    MathSolver(const std::string& task);
 
-	bool solve();
+    bool solve();
 
-	T getValue() const;
-	std::string getTask() const;
+    T getValue() const;
+    std::string getTask() const;
 
-	T getVariable(const std::string& variableName);
-	std::string getStringVariable(const std::string& variableName);
+    T getVariable(const std::string& variableName);
+    std::string getStringVariable(const std::string& variableName);
 
-	T getDerivative(T& variable);
-	T getSecondDerivative(T& variable);
-	T getThirdDerivative(T& variable);
+    T getDerivative(T& variable);
+    T getSecondDerivative(T& variable);
+    T getThirdDerivative(T& variable);
 
-	T getIntegral(T& variable, T initialX, T finalX);
+    T getIntegral(T& variable, T initialX, T finalX);
 
-	void setTask(const std::string& task);
+    void setTask(const std::string& task);
 
-	void addVariable(const std::string& variableName, T& variable);
-	void addConstant(const std::string& constantName, T& constant);
-	void addStringVar(const std::string& stringVariableName, std::string& variable);
-	void addFunction(const std::string& functionName, exprtk::ifunction<T>& function);
-	void addCompositorFunction(const std::string& functionName, const std::vector<std::string>& parameters, const std::string& functionBody);
+    void addVariable(const std::string& variableName, T& variable);
+    void addConstant(const std::string& constantName, T& constant);
+    void addStringVar(const std::string& stringVariableName, std::string& variable);
+    void addFunction(const std::string& functionName, exprtk::ifunction<T>& function);
+    void addCompositorFunction(const std::string& functionName, const std::vector<std::string>& parameters, const std::string& functionBody);
 
-	void removeVariable(const std::string& variableName);
-	void removeStringVar(const std::string& stringVariableName);
-	void removeFunction(const std::string& functionName);
+    void removeVariable(const std::string& variableName);
+    void removeStringVar(const std::string& stringVariableName);
+    void removeFunction(const std::string& functionName);
 
-	void clearTask();
-	void clearSymbols();
+    void clearTask();
+    void clearSymbols();
 
 private:
-	exprtk::parser<T> parser;
-	exprtk::expression<T> expression;
-	exprtk::symbol_table<T> symbolTable;
-	exprtk::function_compositor<T> compositor;
+    exprtk::parser<T> parser;
+    exprtk::expression<T> expression;
+    exprtk::symbol_table<T> symbolTable;
+    exprtk::function_compositor<T> compositor;
 
-	exprtk::parser_error::type error;
+    exprtk::parser_error::type error;
 
-	std::string task;
+    std::string task;
 
-	GCD<T> gcd;
-	LCM<T> lcm;
-	PrimeTest<T> primeTest;
+    GCD<T> gcd;
+    LCM<T> lcm;
+    PrimeTest<T> primeTest;
 
-	void loadConstants();
-	void loadFunctions();
+    void loadConstants();
+    void loadFunctions();
 };
 
 
 template<typename T>
 MathSolver<T>::MathSolver() :
-	MathSolver("")
+    MathSolver("")
 {
 }
 
 template<typename T>
 MathSolver<T>::MathSolver(const std::string& task) :
-	parser(),
-	expression(),
-	symbolTable(),
-	compositor(symbolTable),
-	task(task),
-	error()
+    parser(),
+    expression(),
+    symbolTable(),
+    compositor(symbolTable),
+    task(task),
+    error()
 {
-	expression.register_symbol_table(symbolTable);
+    expression.register_symbol_table(symbolTable);
 
-	loadConstants();
-	loadFunctions();
+    loadConstants();
+    loadFunctions();
 }
 
 template<typename T>
 bool MathSolver<T>::solve()
 {
-	if (!this->parser.compile(this->task, this->expression))
-	{
-		for (std::size_t i = 0; i < this->parser.error_count(); ++i)
-		{
-			this->error = this->parser.get_error(i);
+    if (!this->parser.compile(this->task, this->expression))
+    {
+        for (std::size_t i = 0; i < this->parser.error_count(); ++i)
+        {
+            this->error = this->parser.get_error(i);
 
-			std::cerr << "Error: " << i << " [LINE]: " << this->error.line_no << " [COL]: " << this->error.column_no << " [POS]: " << this->error.token.position
-				<< " Type: " << exprtk::parser_error::to_str(this->error.mode).c_str() << " Message: " << this->error.diagnostic.c_str() << "\n";
-		}
+            std::cerr << "Error: " << i << " [LINE]: " << this->error.line_no << " [COL]: " << this->error.column_no << " [POS]: " << this->error.token.position
+                << " Type: " << exprtk::parser_error::to_str(this->error.mode).c_str() << " Message: " << this->error.diagnostic.c_str() << "\n";
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 template<typename T>
 T MathSolver<T>::getValue() const
 {
-	return this->expression.value();
+    return this->expression.value();
 }
 
 template<typename T>
 std::string MathSolver<T>::getTask() const
 {
-	return this->task;
+    return this->task;
 }
 
 template<typename T>
 T MathSolver<T>::getVariable(const std::string& variableName)
 {
-	return this->symbolTable.get_variable(variableName)->ref();
+    return this->symbolTable.get_variable(variableName)->ref();
 }
 
 template<typename T>
 std::string MathSolver<T>::getStringVariable(const std::string& variableName)
 {
-	return this->symbolTable.get_stringvar(variableName)->value();
+    return this->symbolTable.get_stringvar(variableName)->value();
 }
 
 template<typename T>
 T MathSolver<T>::getDerivative(T& variable)
 {
-	return exprtk::derivative(this->expression, variable);
+    return exprtk::derivative(this->expression, variable);
 }
 
 template<typename T>
 T MathSolver<T>::getSecondDerivative(T& variable)
 {
-	return exprtk::second_derivative(this->expression, variable);
+    return exprtk::second_derivative(this->expression, variable);
 }
 
 template<typename T>
 T MathSolver<T>::getThirdDerivative(T& variable)
 {
-	return exprtk::third_derivative(this->expression, variable);
+    return exprtk::third_derivative(this->expression, variable);
 }
 
 template<typename T>
 T MathSolver<T>::getIntegral(T& variable, T initialX, T finalX)
 {
-	return exprtk::integrate(this->expression, variable, initialX, finalX);
+    return exprtk::integrate(this->expression, variable, initialX, finalX);
 }
 
 template<typename T>
 void MathSolver<T>::setTask(const std::string& task)
 {
-	this->task = task;
+    this->task = task;
 }
 
 template<typename T>
 void MathSolver<T>::addVariable(const std::string& variableName, T& variable)
 {
-	this->symbolTable.add_variable(variableName, variable);
+    this->symbolTable.add_variable(variableName, variable);
 }
 
 template<typename T>
 void MathSolver<T>::addConstant(const std::string& constantName, T& variable)
 {
-	this->symbolTable.add_constant(constantName, variable);
+    this->symbolTable.add_constant(constantName, variable);
 }
 
 template<typename T>
 void MathSolver<T>::addStringVar(const std::string& stringVariableName, std::string& variable)
 {
-	this->symbolTable.add_stringvar(stringVariableName, variable);
+    this->symbolTable.add_stringvar(stringVariableName, variable);
 }
 
 template<typename T>
 void MathSolver<T>::addFunction(const std::string& functionName, exprtk::ifunction<T>& function)
 {
-	this->symbolTable.add_function(functionName, function);
+    this->symbolTable.add_function(functionName, function);
 }
 
 template<typename T>
 void MathSolver<T>::addCompositorFunction(const std::string& functionName, const std::vector<std::string>& parameters, const std::string& functionBody)
 {
-	exprtk::function_compositor<T>::function function(functionName, functionBody);
+    exprtk::function_compositor<T>::function function(functionName, functionBody);
 
-	for (const auto& parameter : parameters)
-	{
-		function.var(parameter);
-	}
+    for (const auto& parameter : parameters)
+    {
+        function.var(parameter);
+    }
 
-	this->compositor.add(function, true);
+    this->compositor.add(function, true);
 }
 
 template<typename T>
 void MathSolver<T>::removeVariable(const std::string& variableName)
 {
-	this->symbolTable.remove_variable(variableName);
+    this->symbolTable.remove_variable(variableName);
 }
 
 template<typename T>
 void MathSolver<T>::removeStringVar(const std::string& stringVariableName)
 {
-	this->symbolTable.remove_stringvar(stringVariableName);
+    this->symbolTable.remove_stringvar(stringVariableName);
 }
 
 template<typename T>
 void MathSolver<T>::removeFunction(const std::string& functionName)
 {
-	this->symbolTable.remove_function(functionName);
+    this->symbolTable.remove_function(functionName);
 }
 
 template<typename T>
 void MathSolver<T>::clearTask()
 {
-	this->task.clear();
+    this->task.clear();
 }
 
 template<typename T>
 void MathSolver<T>::clearSymbols()
 {
-	this->symbolTable.clear();
+    this->symbolTable.clear();
 }
 
 template<typename T>
 void MathSolver<T>::loadConstants()
 {
-	this->symbolTable.add_constants();
-	this->symbolTable.add_constant("e", boost::math::constants::e<long double>());
+    this->symbolTable.add_constants();
+    this->symbolTable.add_constant("e", boost::math::constants::e<long double>());
 }
 
 template<typename T>
 void MathSolver<T>::loadFunctions()
 {
-	this->symbolTable.add_function("gcd", this->gcd);
-	this->symbolTable.add_function("lcm", this->lcm);
-	this->symbolTable.add_function("is_prime", this->primeTest);
+    this->symbolTable.add_function("gcd", this->gcd);
+    this->symbolTable.add_function("lcm", this->lcm);
+    this->symbolTable.add_function("is_prime", this->primeTest);
 }

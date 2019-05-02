@@ -20,15 +20,15 @@ InversePalindrome.com
 class ModifyVariablesWindow : public wxMiniFrame
 {
 public:
-	ModifyVariablesWindow(wxWindow* parent, MathDataDefault* mathData);
+    ModifyVariablesWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	wxGridSizer* gridSizer;
+    wxGridSizer* gridSizer;
 
-	std::unordered_map<std::size_t, std::tuple<wxStaticText*, wxTextCtrl*, wxButton*>> variableWidgets;
+    std::unordered_map<std::size_t, std::tuple<wxStaticText*, wxTextCtrl*, wxButton*>> variableWidgets;
 
-	void OnModifyVariable(wxMouseEvent& event);
-	void OnDeleteVariable(wxMouseEvent& event);
+    void OnModifyVariable(wxMouseEvent& event);
+    void OnDeleteVariable(wxMouseEvent& event);
 };

@@ -16,13 +16,13 @@ InversePalindrome.com
 class AddConstantWindow : public wxMiniFrame
 {
 public:
-	AddConstantWindow(wxWindow* parent, MathDataDefault* mathData);
+    AddConstantWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	wxTextCtrl* nameEntry;
-	wxTextCtrl* valueEntry;
+    wxTextCtrl* nameEntry;
+    wxTextCtrl* valueEntry;
 
-	void OnAddConstant(wxMouseEvent& event);
+    void OnAddConstant(wxMouseEvent& event);
 };

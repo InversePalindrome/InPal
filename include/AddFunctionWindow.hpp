@@ -16,14 +16,14 @@ InversePalindrome.com
 class AddFunctionWindow : public wxMiniFrame
 {
 public:
-	AddFunctionWindow(wxWindow* parent, MathDataDefault* mathData);
+    AddFunctionWindow(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	wxTextCtrl* nameEntry;
-	wxTextCtrl* parameterEntry;
-	wxTextCtrl* bodyEntry;
+    wxTextCtrl* nameEntry;
+    wxTextCtrl* parameterEntry;
+    wxTextCtrl* bodyEntry;
 
-	void OnAddFunction(wxMouseEvent& event);
+    void OnAddFunction(wxMouseEvent& event);
 };

@@ -17,25 +17,25 @@ InversePalindrome.com
 class CalculusPanel : public wxPanel
 {
 public:
-	CalculusPanel(wxWindow* parent, MathDataDefault* mathData);
+    CalculusPanel(wxWindow* parent, MathDataDefault* mathData);
 
 private:
-	MathDataDefault* mathData;
+    MathDataDefault* mathData;
 
-	wxChoice* derivativeChoice;
+    wxChoice* derivativeChoice;
 
-	wxTextCtrl* derivativeEntry;
-	wxTextCtrl* xPositionEntry;
-	wxTextCtrl* derivativeSolution;
+    wxTextCtrl* derivativeEntry;
+    wxTextCtrl* xPositionEntry;
+    wxTextCtrl* derivativeSolution;
 
-	wxTextCtrl* integralEntry;
-	wxTextCtrl* initialXEntry;
-	wxTextCtrl* finalXEntry;
-	wxTextCtrl* integralSolution;
+    wxTextCtrl* integralEntry;
+    wxTextCtrl* initialXEntry;
+    wxTextCtrl* finalXEntry;
+    wxTextCtrl* integralSolution;
 
-	void OnSolveDerivative(wxMouseEvent& event);
-	void OnSolveIntegral(wxMouseEvent& event);
+    void OnSolveDerivative(wxMouseEvent& event);
+    void OnSolveIntegral(wxMouseEvent& event);
 
-	void OnClearDerivative(wxMouseEvent& event);
-	void OnClearIntegral(wxMouseEvent& event);
+    void OnClearDerivative(wxMouseEvent& event);
+    void OnClearIntegral(wxMouseEvent& event);
 };
